@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -83,7 +84,7 @@ function App(): JSX.Element {
           <Section title="testing from main branch">
             <ReloadInstructions />
           </Section>
-          <Section title="Debug">
+          <Section title="testing from dev branch">
             <DebugInstructions />
           </Section>
           <Section title="Learn More">
