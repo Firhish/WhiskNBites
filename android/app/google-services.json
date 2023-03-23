@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "980975428277",
+    "project_id": "whisk-n-bites-a4339",
+    "storage_bucket": "whisk-n-bites-a4339.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980975428277:android:486540961cd2e5008214fc",
+        "android_client_info": {
+          "package_name": "com.whisknbites"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980975428277-it9ml28hv5kphspvgvqtfagot762o9ar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGPL7QmoxqGE7PPjCL_8oyu5Mv_9-30Jw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980975428277-it9ml28hv5kphspvgvqtfagot762o9ar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
