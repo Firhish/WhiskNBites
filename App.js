@@ -6,6 +6,7 @@ import { firebase } from '@react-native-firebase/database';
 import { SafeAreaView, Text, View } from "react-native";
 import Landing from "./pages/Landing";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,8 +18,8 @@ class App extends Component {
         <Stack.Navigator>
         <Stack.Screen name='Landing' component={Landing} options={{headerShown:false}}/>
         <Stack.Screen name='SignIn' component={SignIn} options={{headerShown:false}}/>
-        {/* <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
-        <Stack.Screen name='Tabs' component={Tabs} options={{headerShown:false}}/> */}
+        <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
+        {/* <Stack.Screen name='Tabs' component={Tabs} options={{headerShown:false}}/> */}
         </Stack.Navigator>
 
       </NavigationContainer>
