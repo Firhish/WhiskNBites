@@ -5,5 +5,7 @@
 - Add Firebase connection
 - Add Basic Nav
 - Add Landing page
+- Add SignIn page (without wrapper)
+- Add SignUp page 
 
 ## Fixed
