@@ -8,6 +8,7 @@ import Landing from "./pages/Landing";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import TabsCust from "./pages/customer/TabsCust";
+import ForgotPwd from "./pages/ForgotPwd";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ class App extends Component {
         <Stack.Navigator>
         <Stack.Screen name='Landing' component={Landing} options={{headerShown:false}}/>
         <Stack.Screen name='SignIn' component={SignIn} options={{headerShown:false}}/>
+        <Stack.Screen name='ForgotPwd' component={ForgotPwd} options={{headerShown:false}}/>
         <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
         <Stack.Screen name='TabsCust' component={TabsCust} options={{headerShown:false}}/>
         </Stack.Navigator>

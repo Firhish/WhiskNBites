@@ -2,40 +2,24 @@ import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { Component } from 'react';
 
-class SignIn extends Component {
+class ForgotPwd extends Component {
 
     state = {
         emailVal: '',
-        pwdVal: '',
         isFocusedEmail: false,
-        isFocusedPwd: false,
     }
 
     onClickHandle = () => {
 
         auth()
-            .signInWithEmailAndPassword(this.state.emailVal, this.state.pwdVal)
+            .sendPasswordResetEmail(this.state.emailVal)
             .then(() => {
-                console.log('User signed in!');
-                this.props.navigation.navigate('TabsCust');
+                console.log('email sent')
+                this.props.navigation.navigate('SignIn')
             })
             .catch(error => {
-                if (error.code === 'auth/wrong-password') {
-                    console.log('Wrong password');
-                    alert('Wrong password');
-                }
-                if (error.code === 'auth/user-not-found') {
-                    console.log('User not found');
-                    alert('Email not registered')
-                }
-                if (error.code === 'auth/invalid-email') {
-                    console.log('Invalid email');
-                    alert('Invalid email address');
-                }
                 console.error(error);
             });
-
-
 
     }
 
@@ -43,27 +27,17 @@ class SignIn extends Component {
 
     handleBlurEmail = () => this.setState({ isFocusedEmail: false })
 
-    handleFocusPwd = () => this.setState({ isFocusedPwd: true })
-
-    handleBlurPwd = () => this.setState({ isFocusedPwd: false })
-
     setEmail = (text) => {
-
         this.setState({ emailVal: text });
-    }
-
-    setPwd = (text) => {
-
-        this.setState({ pwdVal: text });
     }
 
     render() {
         return (
-
+            
             <View style={styles.mainContainer}>
                 <View>
-                    <Text style={styles.header}>Sign In</Text>
-                    <Text style={styles.greetings} >Hi there! It's nice to have you back</Text>
+                    <Text style={styles.header}>Forgot Password?</Text>
+                    <Text style={styles.greetings} >It's okay don't panic</Text>
                 </View>
 
                 <View>
@@ -75,21 +49,10 @@ class SignIn extends Component {
                         onBlur={this.handleBlurEmail}
                         onFocus={this.handleFocusEmail}
                     />
-                    <TextInput
-
-                        style={[styles.textInp, this.state.isFocusedPwd ? styles.textInpFocus : styles.textInpBlur]}
-                        placeholder='Password'
-                        value={this.state.pwdVal}
-                        onChangeText={text => (this.setPwd(text))}
-                        onBlur={this.handleBlurPwd}
-                        onFocus={this.handleFocusPwd}
-                        secureTextEntry={true}
-                    />
                 </View>
 
                 <View>
-                <Pressable onPress={(this.state.emailVal != "" && this.state.pwdVal != "") ? this.onClickHandle : () => { alert('All field must be filled') }}><View style={styles.signInBtn}><Text style={styles.signInBtnText}>SIGN IN</Text></View></Pressable>
-                    <Pressable onPress={() => { this.props.navigation.navigate('ForgotPwd') }}><Text style={styles.forgotPwdText}>Forgot your password?<Text style={styles.reset}> Reset here</Text></Text></Pressable>
+                    <Pressable onPress={(this.state.emailVal != "") ? this.onClickHandle : () => { alert('All field must be filled') }}><View style={styles.sendEmailBtn}><Text style={styles.sendEmailBtnText}>SEND VIA EMAIL</Text></View></Pressable>
                 </View>
 
             </View>
@@ -109,7 +72,7 @@ const styles = StyleSheet.create({
     },
 
     header: {
-        fontSize: 70,
+        fontSize: 50,
         color: '#1f1f1e',
         fontWeight: '800',
         letterSpacing: 2,
@@ -138,7 +101,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
 
-    signInBtn: {
+    sendEmailBtn: {
+        fontWeight: '700',
         paddingTop: 15,
         paddingBottom: 15,
         paddingLeft: 95,
@@ -150,24 +114,13 @@ const styles = StyleSheet.create({
         letterSpacing: 2,
     },
 
-    signInBtnText: {
+    sendEmailBtnText: {
         color: 'white',
         textAlign: 'center',
         fontWeight: '700',
         letterSpacing: 2,
-        fontSize: 18
+        fontSize: 12
     },
-
-    forgotPwdText: {
-        textAlign: 'center',
-        fontWeight: '600'
-    },
-
-    reset: {
-        fontWeight: '800'
-
-    },
-
 
 })
-export default SignIn;
+export default ForgotPwd;

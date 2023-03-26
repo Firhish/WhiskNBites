@@ -7,5 +7,6 @@
 - Add Landing page
 - Add SignIn page (without wrapper)
 - Add SignUp page 
+- Add Forgot password feature
 
 ## Fixed
