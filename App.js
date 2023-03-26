@@ -7,6 +7,7 @@ import { SafeAreaView, Text, View } from "react-native";
 import Landing from "./pages/Landing";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import TabsCust from "./pages/customer/TabsCust";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +20,7 @@ class App extends Component {
         <Stack.Screen name='Landing' component={Landing} options={{headerShown:false}}/>
         <Stack.Screen name='SignIn' component={SignIn} options={{headerShown:false}}/>
         <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
-        {/* <Stack.Screen name='Tabs' component={Tabs} options={{headerShown:false}}/> */}
+        <Stack.Screen name='TabsCust' component={TabsCust} options={{headerShown:false}}/>
         </Stack.Navigator>
 
       </NavigationContainer>
