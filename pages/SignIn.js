@@ -16,8 +16,16 @@ class SignIn extends Component {
         auth()
             .signInWithEmailAndPassword(this.state.emailVal, this.state.pwdVal)
             .then(() => {
-                console.log('User signed in!');
-                this.props.navigation.navigate('TabsCust');
+
+                if(auth().currentUser.uid=="79u2YqJWtaZ4ZfjP8GuBVLK7QP52"){
+                    console.log("Moderator signed in!")
+                    this.props.navigation.navigate('TabsMod');
+                }
+                else{
+                    console.log('User signed in!');
+                    this.props.navigation.navigate('TabsCust');
+                }
+                
             })
             .catch(error => {
                 if (error.code === 'auth/wrong-password') {
