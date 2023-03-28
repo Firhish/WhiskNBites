@@ -8,5 +8,6 @@
 - Add SignIn page (without wrapper)
 - Add SignUp page 
 - Add Forgot password feature
+- Add wrapper to SignIn page
 
 ## Fixed
