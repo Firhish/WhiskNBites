@@ -9,5 +9,6 @@
 - Add SignUp page 
 - Add Forgot password feature
 - Add wrapper to SignIn page
+- Add Customer tabs
 
 ## Fixed
