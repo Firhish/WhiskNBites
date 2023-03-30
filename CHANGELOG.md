@@ -10,5 +10,6 @@
 - Add Forgot password feature
 - Add wrapper to SignIn page
 - Add Customer tabs
+- Add Moderator tabs
 
 ## Fixed
