@@ -1,9 +1,7 @@
-import { createBottomTabNavigator, useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Component } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-// import AddPost from "../pages/AddPost";
-// import Explore from "../pages/Explore";
 
 //Screens
 import CatalogCust from "./CatalogCust";
@@ -18,38 +16,8 @@ const promotionName = "Promotion"
 const profileName = "Profile"
 
 const bottomNav = createBottomTabNavigator();
-const CustomTabBarButton = ({children, onPress})=>(
-    <TouchableOpacity
-        onPress={onPress}
-        style={{
-            top:-30,
-            justifyContent:'center',
-            alignItems:'center',
-            
-            // borderColor:'white',
-            // borderRadius:35,         
-        }}
-    >
-        <View style={{
-            width:80,
-            height:80,
-            //borderRadius:35,
-            backgroundColor:'#900',
-             elevation:10,
-            // shadowColor:'#black',
-            borderRadius:49,
-            // borderWidth:7, 
-            // borderColor:'white',
-        }}>
-            {children}
-        </View>
-    </TouchableOpacity>
 
-);
-
-
-
-class Tabs extends Component {
+class TabsCust extends Component {
 
     render() {
 
@@ -68,63 +36,27 @@ class Tabs extends Component {
                             iconName = focused ? 'file-tray-full' : 'file-tray-full-outline';
                         } else if (rn === profileName) {
                             iconName = focused ? 'person-circle' : 'person-circle-outline';
-                        } 
-                        return <Ionicons name={iconName} size={30} color={focused?'#DB9B06':'grey'} />
+                        }
+                        return <Ionicons name={iconName} size={30} color={focused ? '#DB9B06' : 'grey'} />
                     },
-                    tabBarShowLabel: false,
-                    // tabBarActiveTintColor: '#900',
-                    // tabBarInactiveTintColor: '#000',
+                    tabBarShowLabel: true,
+                    tabBarLabel: ({ focused, color, size }) => {
+                        return <Text style={{ color: focused ? '#DB9B06' : 'grey', fontSize: 12 }}>{route.name}</Text>
+                    },
                     tabBarStyle: {
                         backgroundColor: '#fff',
                         height: 70,
-                        // position: 'absolute',
-                        // bottom: 20,
-                        // left: 20,
-                        // right: 20,
-                        // borderRadius: 15,
-                        // ...styles.shadow,
+                        paddingBottom: 10,
                     },
 
                 })}
             >
                 <bottomNav.Screen name={promotionName} component={PromotionCust} options={{ headerShown: false }} />
                 <bottomNav.Screen name={catalogName} component={CatalogCust} options={{ headerShown: false }} />
-                {/* <bottomNav.Screen name={addPostName} component={AddPost} options={{ 
-                    headerShown: false ,
-                    tabBarIcon: ({focused}) =>(
-                        <Ionicons name={'add'} size={50} color='white' />
-                    ),
-                    tabBarButton:(props)=>(
-                        <CustomTabBarButton{...props}/>
-                    )
-                }}
-                
-                 /> */}
                 <bottomNav.Screen name={orderName} component={OrderCust} options={{ headerShown: false }} />
                 <bottomNav.Screen name={profileName} component={ProfileCust} options={{ headerShown: false }} />
             </bottomNav.Navigator>
-
-
-
-
-
-
         );
     }
 }
-export default Tabs;
-
-const styles = StyleSheet.create({
-
-    shadow:{
-        shadowColor: '#7F5DF0',
-        shadowOffset:{
-            width:0,
-            height:10,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.5,
-        elevation:10,
-
-    },
-})
+export default TabsCust;

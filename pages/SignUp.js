@@ -65,7 +65,7 @@ class SignUp extends Component {
             <View style={styles.mainContainer}>
                 <View>
                     <Text style={styles.header}>Sign Up</Text>
-                    <Text style={styles.greetings}>Welcome!, Got a cookie craving? </Text>
+                    <Text style={styles.greetings}>Welcome! Got a cookie craving? </Text>
                 </View>
                 <View>
                     <TextInput
