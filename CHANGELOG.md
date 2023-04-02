@@ -11,5 +11,5 @@
 - Add wrapper to SignIn page
 - Add Customer tabs
 - Add Moderator tabs
-
+- Add UI Catalog
 ## Fixed
