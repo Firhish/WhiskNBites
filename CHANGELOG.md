@@ -12,4 +12,5 @@
 - Add Customer tabs
 - Add Moderator tabs
 - Add UI Catalog
+- Add Catalog List Customer w Firebase connection
 ## Fixed
