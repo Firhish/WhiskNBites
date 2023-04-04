@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 class TabHeader extends Component {
@@ -8,7 +8,8 @@ class TabHeader extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
-        {icon && <Ionicons name={icon} size={28} color="white" style={styles.icon} />}
+        <Pressable onPress={this.props.iconClickHandle} style={styles.icon}>{icon && <Ionicons name={icon} size={28} color="white"  />}</Pressable>
+        {/* {icon && <Ionicons name={icon} size={28} color="white" style={styles.icon} />} */}
       </View>
     );
   }
