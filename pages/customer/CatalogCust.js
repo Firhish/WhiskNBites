@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Dimensions, ScrollView, SafeAreaView } from 'react-native';
+import { View, StyleSheet, Dimensions, ScrollView, SafeAreaView, Text } from 'react-native';
 import CatalogBoxCust from '../../components/Catalog/CatalogBoxCust';
 import TabHeader from '../../components/TabHeader';
 import database from '@react-native-firebase/database';
@@ -40,6 +40,10 @@ class CatalogCust extends Component {
     this.setState({ items: arr });
   }
 
+  addToCart = () =>{
+    console.log('to cart page')
+  }
+
   componentDidMount() {
     this.getData()
   }
@@ -69,11 +73,14 @@ class CatalogCust extends Component {
 
       <SafeAreaView>
 
-        <TabHeader title='Catalog' icon='cart' />
+        <TabHeader title='Catalog' icon='cart' iconClickHandle={this.addToCart} />
 
         <ScrollView>
 
-          <View style={styles.container}>{this.renderItems()}</View>
+        {this.state.items.length != 0 ?
+            <View style={styles.container}>{this.renderItems()}</View> :
+            <Text style={{textAlign:'center', marginTop:'70%', fontSize:16}} >Aw, snap! No cookies here</Text>
+          }
 
         </ScrollView>
 

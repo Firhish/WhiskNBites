@@ -13,4 +13,5 @@
 - Add Moderator tabs
 - Add UI Catalog
 - Add Catalog List Customer w Firebase connection
+- Add 'Add New Product' Feature for Moderator
 ## Fixed
