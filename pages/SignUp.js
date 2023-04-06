@@ -70,7 +70,7 @@ class SignUp extends Component {
                 <View>
                     <TextInput
                         style={[styles.textInp, this.state.isFocusedEmail ? styles.textInpFocus : styles.textInpBlur]}
-                        placeholder='email'
+                        placeholder='Email Address'
                         value={this.state.emailVal}
                         onChangeText={text => (this.setEmail(text))}
                         onBlur={this.handleBlurEmail}
@@ -78,7 +78,7 @@ class SignUp extends Component {
                     />
                     <TextInput
                         style={[styles.textInp, this.state.isFocusedPwd ? styles.textInpFocus : styles.textInpBlur]}
-                        placeholder='password'
+                        placeholder='Password'
                         value={this.state.pwdVal}
                         onChangeText={text => (this.setPwd(text))}
                         onBlur={this.handleBlurPwd}

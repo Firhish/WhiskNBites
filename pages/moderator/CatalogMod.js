@@ -60,7 +60,7 @@ class CatalogMod extends Component {
   }
 
   addItems = () => {
-    console.log('to add items page')
+    this.props.navigation.navigate('AddProductForm')
   }
 
   delItems = (id) => {
@@ -68,7 +68,10 @@ class CatalogMod extends Component {
     database()
       .ref('/Products/'+id)
       .remove()
-      .then(console.log('Product '+id+' deleted'))
+      .then(()=>{
+        console.log('Product '+id+' deleted')
+        alert('Product deleted successfully')
+      })
 
   }
 
