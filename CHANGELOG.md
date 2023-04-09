@@ -15,4 +15,7 @@
 - Add Catalog List Customer w Firebase connection
 - Add 'Add New Product' Feature for Moderator
 - Add pick image function (not yet done)
+- Add Transparent Header
+
 ## Fixed
+- Fixed UI Add New Product form
