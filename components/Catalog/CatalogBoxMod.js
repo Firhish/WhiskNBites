@@ -3,7 +3,6 @@ import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 const ITEM_SIZE = 160;
-// const test = 3
 
 class CatalogBoxMod extends Component {
   render() {
