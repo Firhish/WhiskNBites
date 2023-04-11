@@ -10,6 +10,7 @@ class AddProductForm extends Component {
     productName: '',
     productPrice: '',
     productImage: null,
+    productDescription: '',
   };
 
   handleProductNameChange = productName => {
@@ -20,8 +21,12 @@ class AddProductForm extends Component {
     this.setState({ productPrice });
   };
 
-  handleProductImage = productImage => {
+  handleProductImageChange = productImage => {
     this.setState({ productImage });
+  };
+
+  handleProductDescriptionChange = productDescription => {
+    this.setState({ productDescription });
   };
 
   pickImage = () => {
@@ -38,6 +43,7 @@ class AddProductForm extends Component {
         product_name: this.state.productName,
         product_price: this.state.productPrice,
         product_image: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/almondLondon.jpg?alt=media&token=4d342545-4f84-435b-91b3-461ce530b15f',
+        product_description: this.state.productDescription,
       })
       .then(() => {
         alert('Product added successfully')
@@ -65,10 +71,16 @@ class AddProductForm extends Component {
               keyboardType="numeric"
               placeholder='Product Price'
             />
+            <TextInput
+              style={styles.input}
+              onChangeText={this.handleProductDescriptionChange}
+              value={this.state.productDescription}
+              placeholder='Product Description'
+            />
           {this.state.productImage && (
               <Image style={styles.image} source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/almondLondon.jpg?alt=media&token=4d342545-4f84-435b-91b3-461ce530b15f' }} />
             )}
-            <Pressable onPress={()=>this.handleProductImage('https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/almondLondon.jpg?alt=media&token=4d342545-4f84-435b-91b3-461ce530b15f')}>
+            <Pressable onPress={()=>this.handleProductImageChange('https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/almondLondon.jpg?alt=media&token=4d342545-4f84-435b-91b3-461ce530b15f')}>
               <Text style={styles.chooseImgBtn}>Choose Image</Text>
             </Pressable>
           </View>
@@ -112,7 +124,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     width: '40%',
     textAlign: 'center',
-    backgroundColor: '#c1c1c1',
+    backgroundColor: '#707070',
     color: 'white',
     marginTop:10,
     borderRadius:8,
