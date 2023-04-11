@@ -6,7 +6,6 @@ import database from '@react-native-firebase/database';
 
 const { width } = Dimensions.get('window');
 
-//define size for each block
 const ITEM_SIZE = 160;
 const ITEM_MARGIN = 10;
 

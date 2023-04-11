@@ -20,3 +20,4 @@
 
 ## Fixed
 - Fixed UI Add New Product form
+- Fixed Catalog list for Customer

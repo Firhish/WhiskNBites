@@ -10,7 +10,6 @@ import ConfirmModal from '../../components/ConfirmModal';
 
 const { width } = Dimensions.get('window');
 
-//define size for each block
 const ITEM_SIZE = 160;
 const ITEM_MARGIN = 10;
 
@@ -91,7 +90,6 @@ class CatalogMod extends Component {
     <Pressable key={id} onLongPress={() => {
       this.setModalVisible(!this.state.modalVisible)
       this.setItemsId(id)
-      // console.log(this.state.itemsId+' hehe')
     }}>
       <CatalogBoxMod key={id} product_name={product_name} product_price={product_price} product_image={product_image} />
     </Pressable>
@@ -123,7 +121,6 @@ class CatalogMod extends Component {
           modalVisible={this.state.modalVisible}
           toggle={() => { this.setModalVisible(!this.state.modalVisible) }}
           firstOptFunc={() => {
-            // this.delItems(this.state.itemsId)
             this.setConfirmModalVisible(!this.state.confirmModalVisible)
           }}
           secondOptFunc={() => {
@@ -149,7 +146,6 @@ class CatalogMod extends Component {
             <View style={styles.container}>{this.renderItems()}</View> :
             <Text style={{ textAlign: 'center', marginTop: '70%', fontSize: 16 }} >Aw, snap! No cookies here</Text>
           }
-          {/* <Text>The catalog is empty</Text> */}
         </ScrollView>
         <Overlay visible={this.state.modalVisible} />
       </View>
