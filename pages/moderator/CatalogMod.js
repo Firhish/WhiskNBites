@@ -21,7 +21,7 @@ class CatalogMod extends Component {
     items: [],
     modalVisible: false,
     confirmModalVisible: false,
-    itemsId:''
+    itemsId: ''
   }
 
   getData = () => {
@@ -29,18 +29,21 @@ class CatalogMod extends Component {
     database()
       .ref('/Products')
       .on('value', (snapshot) => {
-        let data = [];
-        snapshot.forEach((child) => {
-          temp = child.val()
-          temp.id = child.key
-          data.push(temp)
-          this.setItems(data)
-          console.log(data)
-        })
+        if (snapshot.exists()) {
 
+          let data = [];
+          snapshot.forEach((child) => {
+            temp = child.val()
+            temp.id = child.key
+            data.push(temp)
+            this.setItems(data)
+            console.log(data)
+          })
+        }
+        else {
+          this.setItems([])
+        }
       });
-
-
   }
 
   setItems = (arr) => {
@@ -56,7 +59,7 @@ class CatalogMod extends Component {
   }
 
   setItemsId = (id) => {
-    this.setState({ itemsId:id })
+    this.setState({ itemsId: id })
   }
 
   addItems = () => {
@@ -64,15 +67,19 @@ class CatalogMod extends Component {
   }
 
   delItems = (id) => {
-    
+
     database()
-      .ref('/Products/'+id)
+      .ref('/Products/' + id)
       .remove()
-      .then(()=>{
-        console.log('Product '+id+' deleted')
+      .then(() => {
+        console.log('Product ' + id + ' deleted')
         alert('Product deleted successfully')
       })
 
+  }
+
+  editItems = (id) => {
+    this.props.navigation.navigate('EditProductForm', { productId: id })
   }
 
   componentDidMount() {
@@ -80,15 +87,15 @@ class CatalogMod extends Component {
   }
 
 
-  renderItem = ({id, product_name, product_price, product_image }) => (
-    <Pressable key={id} onLongPress={()=> {
+  renderItem = ({ id, product_name, product_price, product_image }) => (
+    <Pressable key={id} onLongPress={() => {
       this.setModalVisible(!this.state.modalVisible)
       this.setItemsId(id)
       // console.log(this.state.itemsId+' hehe')
     }}>
       <CatalogBoxMod key={id} product_name={product_name} product_price={product_price} product_image={product_image} />
     </Pressable>
-    
+
   );
 
   renderItems = () => {
@@ -114,29 +121,33 @@ class CatalogMod extends Component {
 
         <OptionModal
           modalVisible={this.state.modalVisible}
-          toggle={() => { this.setModalVisible(!this.state.modalVisible) }} 
-          firstOptFunc = {()=>{
+          toggle={() => { this.setModalVisible(!this.state.modalVisible) }}
+          firstOptFunc={() => {
             // this.delItems(this.state.itemsId)
             this.setConfirmModalVisible(!this.state.confirmModalVisible)
-            }}
-          secondOptFunc = {()=>console.log('edit baru mat')}
-          firstOptText = 'Delete Product'
-          secondOptText = 'Edit Product'
-          />
-          <ConfirmModal
-            visible={this.state.confirmModalVisible}
-            warnText={'Are you sure you want to delete this product?'}
-            onConfirm = {()=>{
-              this.delItems(this.state.itemsId)
-              this.setConfirmModalVisible(!this.state.confirmModalVisible)
-              }}
-            onCancel= {()=>this.setConfirmModalVisible(!this.state.confirmModalVisible)}
-          />
+          }}
+          secondOptFunc={() => {
+
+            this.editItems(this.state.itemsId)
+
+          }}
+          firstOptText='Delete Product'
+          secondOptText='Edit Product'
+        />
+        <ConfirmModal
+          visible={this.state.confirmModalVisible}
+          warnText={'Are you sure you want to delete this product?'}
+          onConfirm={() => {
+            this.delItems(this.state.itemsId)
+            this.setConfirmModalVisible(!this.state.confirmModalVisible)
+          }}
+          onCancel={() => this.setConfirmModalVisible(!this.state.confirmModalVisible)}
+        />
         <TabHeader title='Catalog' icon='add' iconClickHandle={this.addItems} />
         <ScrollView>
           {this.state.items.length != 0 ?
             <View style={styles.container}>{this.renderItems()}</View> :
-            <Text style={{textAlign:'center', marginTop:'70%', fontSize:16}} >Aw, snap! No cookies here</Text>
+            <Text style={{ textAlign: 'center', marginTop: '70%', fontSize: 16 }} >Aw, snap! No cookies here</Text>
           }
           {/* <Text>The catalog is empty</Text> */}
         </ScrollView>

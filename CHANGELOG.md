@@ -16,6 +16,7 @@
 - Add 'Add New Product' Feature for Moderator
 - Add pick image function (not yet done)
 - Add Transparent Header
+- Add 'Edit Product' Feature for Moderator  
 
 ## Fixed
 - Fixed UI Add New Product form
