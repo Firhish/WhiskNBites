@@ -54,13 +54,15 @@ class ConfirmModal extends Component {
                   onCancel();
                 }}
                 style={{
-                  backgroundColor: '#c1c1c1',
+                  // backgroundColor: '#c1c1c1',
                   paddingVertical: 10,
                   paddingHorizontal: 20,
                   borderRadius: 5,
+                  borderWidth:2,
+                  borderColor:'#a0a0a0',
                   marginRight:5,
                 }}>
-                <Text style={{ color: '#fff', fontWeight: 'bold' }}>
+                <Text style={{ color: '#a0a0a', fontWeight: 'bold' }}>
                   Cancel
                 </Text>
               </TouchableOpacity>
@@ -70,7 +72,7 @@ class ConfirmModal extends Component {
                   onConfirm();
                 }}
                 style={{
-                  backgroundColor: '#DB9B06c6',
+                  backgroundColor: '#DB9B06',
                   paddingVertical: 10,
                   paddingHorizontal: 20,
                   borderRadius: 5,
