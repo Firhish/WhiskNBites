@@ -84,8 +84,8 @@ class AddProductForm extends Component {
               <Text style={styles.chooseImgBtn}>Choose Image</Text>
             </Pressable>
           </View>
-          <Pressable onPress={this.handleSubmit}>
-            <Text style={styles.submitBtn}>SUBMIT</Text>
+          <Pressable onPress={(this.state.productName!='' && this.state.productPrice!='' && this.state.productDescription!='')?this.handleSubmit:() => { alert('All field must be filled')}}>
+            <Text style={styles.submitBtn}>SAVE</Text>
           </Pressable>
         </View>
       </View>

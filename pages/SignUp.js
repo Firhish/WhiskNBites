@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 const { Component } = require("react");
 
 class SignUp extends Component {
@@ -8,8 +9,13 @@ class SignUp extends Component {
 
         emailVal: '',
         pwdVal: '',
+        phoneVal: '',
+        usernameVal:'',
         isFocusedEmail: false,
         isFocusedPwd: false,
+        isFocusedPhone: false,
+        isFocusedUsername: false,
+        
 
     }
 
@@ -19,7 +25,20 @@ class SignUp extends Component {
             .createUserWithEmailAndPassword(this.state.emailVal, this.state.pwdVal)
             .then(() => {
                 console.log('User account created & signed in!');
-                this.props.navigation.navigate('TabsCust');
+                database()
+                    .ref('/Users')
+                    .push()
+                    .set({
+                        email: this.state.emailVal,
+                        phone_no: this.state.phoneVal,
+                        username: this.state.usernameVal,
+                        uid: auth().currentUser.uid,
+                        user_type: 'customer', 
+                    })
+                    .then(() => {
+                        this.props.navigation.navigate('TabsCust');
+                    })
+                // this.props.navigation.navigate('TabsCust');
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
@@ -42,21 +61,28 @@ class SignUp extends Component {
     }
 
     handleFocusEmail = () => this.setState({ isFocusedEmail: true })
-
     handleBlurEmail = () => this.setState({ isFocusedEmail: false })
-
     handleFocusPwd = () => this.setState({ isFocusedPwd: true })
-
     handleBlurPwd = () => this.setState({ isFocusedPwd: false })
+    handleFocusPhone = () => this.setState({ isFocusedPhone: true })
+    handleBlurPhone = () => this.setState({ isFocusedPhone: false })
+    handleFocusUsername = () => this.setState({ isFocusedUsername: true })
+    handleBlurUsername = () => this.setState({ isFocusedUsername: false })
 
     setEmail = (text) => {
-
         this.setState({ emailVal: text });
     }
 
     setPwd = (text) => {
-
         this.setState({ pwdVal: text });
+    }
+
+    setPhone = (text) => {
+        this.setState({ phoneVal: text });
+    }
+
+    setUsername= (text) => {
+        this.setState({ usernameVal: text });
     }
 
     render() {
@@ -77,6 +103,22 @@ class SignUp extends Component {
                         onFocus={this.handleFocusEmail}
                     />
                     <TextInput
+                        style={[styles.textInp, this.state.isFocusedPhone ? styles.textInpFocus : styles.textInpBlur]}
+                        placeholder='Phone Number'
+                        value={this.state.phoneVal}
+                        onChangeText={text => (this.setPhone(text))}
+                        onBlur={this.handleBlurPhone}
+                        onFocus={this.handleFocusPhone}
+                    />
+                    <TextInput
+                        style={[styles.textInp, this.state.isFocusedUsername ? styles.textInpFocus : styles.textInpBlur]}
+                        placeholder='Username'
+                        value={this.state.usernameVal}
+                        onChangeText={text => (this.setUsername(text))}
+                        onBlur={this.handleBlurUsername}
+                        onFocus={this.handleFocusUsername}
+                    />
+                    <TextInput
                         style={[styles.textInp, this.state.isFocusedPwd ? styles.textInpFocus : styles.textInpBlur]}
                         placeholder='Password'
                         value={this.state.pwdVal}
@@ -85,8 +127,9 @@ class SignUp extends Component {
                         onFocus={this.handleFocusPwd}
                         secureTextEntry={true}
                     />
+                    
                 </View>
-                <Pressable onPress={(this.state.emailVal != "" && this.state.pwdVal != "") ? this.onClickHandle : () => { alert('All field must be filled') }}><View style={styles.signUpBtn}><Text style={styles.signUpBtnText}>SIGN UP</Text></View></Pressable>
+                <Pressable onPress={(this.state.emailVal != "" && this.state.pwdVal != "" && this.state.phoneVal != "" && this.state.usernameVal != "") ? this.onClickHandle : () => { alert('All field must be filled') }}><View style={styles.signUpBtn}><Text style={styles.signUpBtnText}>SIGN UP</Text></View></Pressable>
             </View>
 
         )
