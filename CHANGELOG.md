@@ -24,3 +24,4 @@
 - Fixed UI Add New Product form
 - Fixed Catalog list for Customer
 - Fixed UI for option/confirm modal
+- Fixed code readability for option/confirm modal 

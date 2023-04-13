@@ -15,7 +15,7 @@ class OptionModal extends Component {
           window.alert('Modal has been closed.');
         }}>
         <View style={styles.mainContainer}>
-          <Text style={styles.title}>Please choose an option</Text>
+          <Text style={styles.title}>Select Action</Text>
           <TouchableHighlight
             underlayColor={'transparent'}
             style={styles.firstBtn}
@@ -57,71 +57,53 @@ const styles = StyleSheet.create({
   mainContainer: { 
     marginTop: '55%', 
     backgroundColor: '#fff', 
-    padding: 25, 
+    paddingVertical: 25, 
     margin: '5%', 
     borderRadius: 10, 
+    paddingHorizontal: 25, 
   },
 
   title:{ 
-    marginBottom: 20, 
+    marginBottom: 25, 
     textAlign:'center',
     fontWeight: 'bold',
-    fontSize: 18, 
+    fontSize: 20, 
   },
 
   firstBtn:{ 
     textAlign:'center',
-    marginBottom: 10, 
-    // padding: 10, 
-    // backgroundColor: 'yellow',
-     
+    marginBottom: 10,   
   },
 
   firstBtnText:{
     textAlign:'center',
     borderRadius:10, 
-    // borderWidth:2,
     paddingVertical:10,
     backgroundColor:'#DB9B06',
     color:'white',
-    fontSize:16,
   },
 
   secondBtn:{ 
-    // padding: 10, 
-    // backgroundColor: 'yellow',
     marginBottom: 20, 
-    
   },
 
   secondBtnText:{
     width:'100%',
     textAlign:'center',
     borderRadius:10, 
-    // borderWidth:2,
     paddingVertical:10,
     backgroundColor:'#DB9B06',
     color:'white',
-    fontSize:16,
   },
 
-
-  cancelBtn:{ 
-    // padding: 10, 
-    // textAlign:'center',
-    // backgroundColor: 'yellow',
-  },
+  cancelBtn:{},
 
   cancelBtnText:{
-    // width:'100%',
-    // textAlign:'center',
     borderRadius:10, 
     borderWidth:2,
     borderColor: '#a0a0a0',
     paddingVertical:10,
-    // backgroundColor:'#a0a0a0',
     color:'#a0a0a0',
-    fontSize:16,
     textAlign:'center',
     fontWeight:'bold',
   },
