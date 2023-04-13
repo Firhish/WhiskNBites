@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     padding: 8,
     marginVertical:10,
-    width: '90%',
+    width: '100%',
     borderRadius: 5,
   },
   image: {

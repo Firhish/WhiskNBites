@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-import { Modal, View, Text, TouchableOpacity } from 'react-native';
+import { Modal, View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 
 class ConfirmModal extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       visible: false,
-//     };
-//   }
 
   render() {
-    // const { visible } = this.state;
     const { onConfirm, onCancel, visible } = this.props;
 
     return (
@@ -21,67 +14,37 @@ class ConfirmModal extends Component {
           this.setState({ visible: false });
         }}>
         <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          }}>
+          style={styles.mainContainer}>
           <View
-            style={{
-              backgroundColor: '#fff',
-              padding: 20,
-              borderRadius: 10,
-              alignItems: 'center',
-            }}>
-            <Text style={{ fontWeight: 'bold', fontSize: 20 }}>
+            style={styles.modalContainer}>
+            <Text style={styles.title}>
               Confirm Action
             </Text>
-            <Text style={{ marginTop: 10 }}>
-              {/* Are you sure you want to perform this action? */}
+            <Text style={styles.warnText}>
               {this.props.warnText}
             </Text>
             <View
-              style={{
-                flexDirection: 'row',
-                marginTop: 20,
-                // justifyContent: 'space-around',
-                // width: '100%',
-              }}>
-              <TouchableOpacity
+              style={styles.btnContainer}>
+              <TouchableHighlight
+                underlayColor={'transparent'}
                 onPress={() => {
-                //   this.setState({ visible: false });
                   onCancel();
                 }}
-                style={{
-                  // backgroundColor: '#c1c1c1',
-                  paddingVertical: 10,
-                  paddingHorizontal: 20,
-                  borderRadius: 5,
-                  borderWidth:2,
-                  borderColor:'#a0a0a0',
-                  marginRight:5,
-                }}>
-                <Text style={{ color: '#a0a0a', fontWeight: 'bold' }}>
+                style={styles.cancelBtn}>
+                <Text style={styles.cancelBtnText}>
                   Cancel
                 </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </TouchableHighlight>
+              <TouchableHighlight
+                underlayColor={'transparent'}
                 onPress={() => {
-                //   this.setState({ visible: false });
                   onConfirm();
                 }}
-                style={{
-                  backgroundColor: '#DB9B06',
-                  paddingVertical: 10,
-                  paddingHorizontal: 20,
-                  borderRadius: 5,
-                  marginLeft:5,
-                }}>
-                <Text style={{ color: '#fff', fontWeight: 'bold' }}>
+                style={styles.confirmBtn}>
+                <Text style={styles.confirmBtnText}>
                   Confirm
                 </Text>
-              </TouchableOpacity>
+              </TouchableHighlight>
             </View>
           </View>
         </View>
@@ -89,5 +52,66 @@ class ConfirmModal extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+
+  mainContainer:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
+
+  modalContainer:{
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+
+  title:{ 
+    fontWeight: 'bold', 
+    fontSize: 20 
+  },
+
+  warnText:{
+    marginTop: 10 
+  },
+
+  btnContainer:{
+    flexDirection: 'row',
+    marginTop: 20,
+  },
+
+  cancelBtn:{
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    borderWidth:2,
+    borderColor:'#a0a0a0',
+    marginRight:5,
+  },
+
+  cancelBtnText:{ 
+    color: '#a0a0a0', 
+    fontWeight: 'bold' 
+  },
+
+  confirmBtn:{
+    marginLeft:5,          
+  },
+
+  confirmBtnText:{
+    color: '#fff', 
+    fontWeight: 'bold', 
+    backgroundColor: '#DB9B06', 
+    paddingVertical: 12,
+    paddingHorizontal: 22,
+    borderColor: '#DB9B06', 
+    borderRadius: 5
+  },
+
+
+})
 
 export default ConfirmModal;
