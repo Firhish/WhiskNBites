@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, TouchableHighlight } from 'react-native';
 
 class TransparentHeader extends Component {
   render() {
     const { navigation, title, goBack } = this.props;
     return (
       <View style={styles.header}>
-        <TouchableOpacity onPress={goBack}>
+        <TouchableHighlight underlayColor={'transparent'} onPress={goBack}>
           <Text style={styles.backButton}>Back</Text>
-        </TouchableOpacity>
+        </TouchableHighlight>
         <Text style={styles.title}>{title}</Text>
         <View style={{ flex: 1 }}></View>
       </View>

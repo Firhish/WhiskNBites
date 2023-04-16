@@ -110,7 +110,7 @@ class EditProductForm extends Component {
                         </Pressable>
                     </View>
                     <Pressable onPress={(this.state.productName!='' && this.state.productPrice!='' && this.state.productDescription!='')?this.handleSubmit:() => { alert('All field must be filled')}}>
-                        <Text style={styles.submitBtn}>SAVE</Text>
+                        <Text style={styles.submitBtn}>Save</Text>
                     </Pressable>
                 </View>
             </View>

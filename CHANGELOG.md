@@ -19,6 +19,7 @@
 - Add 'Edit Product' Feature for Moderator  
 - Add checker for edit/add form
 - Add user tree in fb
+- Add Catalog Individual for Moderator
 
 ## Fixed
 - Fixed UI Add New Product form
