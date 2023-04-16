@@ -5,7 +5,7 @@ import database from '@react-native-firebase/database';
 
 const { width } = Dimensions.get('window');
 
-class CatalogIndMod extends Component{
+class CatalogIndCust extends Component{
 
     state = {
 
@@ -72,9 +72,9 @@ class CatalogIndMod extends Component{
                     </View>
                     <View style={styles.btnContainer}>
                     {/* Add To Cart For Moderator */}
-                        {/* <TouchableHighlight underlayColor={'transparent'} onPress={() => { console.log('add to cart') }}>
+                        <TouchableHighlight underlayColor={'transparent'} onPress={() => { console.log('add to cart') }}>
                             <Text style={styles.addToCartBtn}>Add To Cart</Text>
-                        </TouchableHighlight> */}
+                        </TouchableHighlight>
                         <TouchableHighlight underlayColor={'transparent'} onPress={() => { console.log('feedback') }}>
                             <Text style={styles.custFeedbackBtn}>Customer Feedbacks</Text>
                         </TouchableHighlight>
@@ -142,16 +142,10 @@ const styles = StyleSheet.create({
     },
 
     custFeedbackBtn:{
-        // textAlign:'center',
-        // marginTop:15,
-        textAlign: 'center',
-        paddingVertical: 15,
-        fontSize: 18,
-        fontWeight: 'bold',
-        backgroundColor: '#DB9B06',
-        color: 'white',
+        textAlign:'center',
+        marginTop:15,
     }
 
 })
 
-export default CatalogIndMod
+export default CatalogIndCust

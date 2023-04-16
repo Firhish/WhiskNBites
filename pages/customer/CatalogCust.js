@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Dimensions, ScrollView, SafeAreaView, Text } from 'react-native';
+import { View, StyleSheet, Dimensions, ScrollView, SafeAreaView, Text, Pressable } from 'react-native';
 import CatalogBoxCust from '../../components/Catalog/CatalogBoxCust';
 import TabHeader from '../../components/TabHeader';
 import database from '@react-native-firebase/database';
@@ -49,7 +49,10 @@ class CatalogCust extends Component {
 
 
   renderItem = ({ id, product_name, product_price, product_image }) => (
-    <CatalogBoxCust key={id} product_name={product_name} product_price={product_price} product_image={product_image} />
+    <Pressable key={id} onPress={()=>{this.props.navigation.navigate('CatalogIndCust',{productId: id})}}>
+      <CatalogBoxCust key={id} product_name={product_name} product_price={product_price} product_image={product_image} />
+    </Pressable>
+    
   );
 
   renderItems = () => {
