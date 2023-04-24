@@ -21,6 +21,7 @@
 - Add user tree in fb
 - Add Catalog Individual for Moderator
 - Add Catalog Individual for Customer
+- Add Feedback UI
 
 ## Fixed
 - Fixed UI Add New Product form
