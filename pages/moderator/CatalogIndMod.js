@@ -75,7 +75,7 @@ class CatalogIndMod extends Component{
                         {/* <TouchableHighlight underlayColor={'transparent'} onPress={() => { console.log('add to cart') }}>
                             <Text style={styles.addToCartBtn}>Add To Cart</Text>
                         </TouchableHighlight> */}
-                        <TouchableHighlight underlayColor={'transparent'} onPress={() => { console.log('feedback') }}>
+                        <TouchableHighlight underlayColor={'transparent'} onPress={()=>{this.props.navigation.navigate('Feedbacks',{productId: this.props.route.params.productId})}}>
                             <Text style={styles.custFeedbackBtn}>Customer Feedbacks</Text>
                         </TouchableHighlight>
                     </View>
