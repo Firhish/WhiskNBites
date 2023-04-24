@@ -10,7 +10,7 @@ class Feedbacks extends Component{
         return(
             // <Text>{this.props.route.params.productId}</Text>
             <View>
-                <TransparentHeader title='Feedbacks'/>
+                <TransparentHeader title='Feedbacks' goBack={this.props.navigation.goBack}/>
                 <FeedbackBox/>
                 {/* <FeedbackBox/>
                 <FeedbackBox/> */}
