@@ -15,6 +15,8 @@ import EditProductForm from "./pages/moderator/EditProductForm";
 import CatalogIndMod from "./pages/moderator/CatalogIndMod";
 import CatalogIndCust from "./pages/customer/CatalogIndCust";
 import Feedbacks from "./pages/Feedbacks";
+import Cart from "./pages/customer/Cart";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +37,7 @@ class App extends Component {
         <Stack.Screen name='CatalogIndMod' component={CatalogIndMod} options={{headerShown:false}}/>
         <Stack.Screen name='CatalogIndCust' component={CatalogIndCust} options={{headerShown:false}}/>
         <Stack.Screen name='Feedbacks' component={Feedbacks} options={{headerShown:false}}/>
+        <Stack.Screen name='Cart' component={Cart} options={{headerShown:false}}/>
         </Stack.Navigator>
 
       </NavigationContainer>

@@ -39,8 +39,8 @@ class CatalogCust extends Component {
     this.setState({ items: arr });
   }
 
-  addToCart = () =>{
-    console.log('to cart page')
+  addToCart = () => {
+    this.props.navigation.navigate('Cart')
   }
 
   componentDidMount() {
@@ -49,10 +49,10 @@ class CatalogCust extends Component {
 
 
   renderItem = ({ id, product_name, product_price, product_image }) => (
-    <Pressable key={id} onPress={()=>{this.props.navigation.navigate('CatalogIndCust',{productId: id})}}>
+    <Pressable key={id} onPress={() => { this.props.navigation.navigate('CatalogIndCust', { productId: id }) }}>
       <CatalogBoxCust key={id} product_name={product_name} product_price={product_price} product_image={product_image} />
     </Pressable>
-    
+
   );
 
   renderItems = () => {
@@ -79,9 +79,9 @@ class CatalogCust extends Component {
 
         <ScrollView>
 
-        {this.state.items.length != 0 ?
+          {this.state.items.length != 0 ?
             <View style={styles.container}>{this.renderItems()}</View> :
-            <Text style={{textAlign:'center', marginTop:'70%', fontSize:16}} >Aw, snap! No cookies here</Text>
+            <Text style={{ textAlign: 'center', marginTop: '70%', fontSize: 16 }} >Aw, snap! No cookies here</Text>
           }
 
         </ScrollView>

@@ -22,6 +22,8 @@
 - Add Catalog Individual for Moderator
 - Add Catalog Individual for Customer
 - Add Feedback UI
+- Add Feedback connection to firebase
+- Add Cart UI and connect to firebase
 
 ## Fixed
 - Fixed UI Add New Product form
