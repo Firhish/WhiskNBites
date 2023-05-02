@@ -57,9 +57,7 @@ class ProductBox extends Component {
                         <Text style={styles.productPrice}>{'RM ' + Number(this.state.prodPrice).toFixed(2)}</Text>
                         <Text style={styles.productQuantity}>{this.state.prodQuantity + ' pcs'}</Text>
                     </View>
-
                 </View>
-                {/* <Divider /> */}
             </View>
 
 
@@ -85,7 +83,6 @@ const styles = StyleSheet.create({
 
         height: 80,
         width: 80,
-        // backgroundColor: 'darkgrey',
         borderRadius: 10,
 
     },
@@ -106,6 +103,7 @@ const styles = StyleSheet.create({
 
         fontWeight: 'bold',
         fontSize: 18,
+        color:'black',
 
     },
 
@@ -113,6 +111,7 @@ const styles = StyleSheet.create({
 
         fontSize: 14,
         marginTop: 8,
+
     }
 
 })

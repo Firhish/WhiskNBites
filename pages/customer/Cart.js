@@ -19,11 +19,19 @@ class Cart extends Component{
             .ref('/Users')
             .on('value', (snapshot) => {
 
-                let data = [];
                 snapshot.forEach((child) => {
+                    
                     if(child.val().uid==auth().currentUser.uid){
 
-                        this.setCart(child.val().cart)
+                        if(child.val().cart!=null){
+
+                            this.setCart(Object.values(child.val().cart))
+
+                        }
+                        else{
+                            return null
+                        }
+
                     }   
                 })
             });
@@ -43,7 +51,7 @@ class Cart extends Component{
 
             <View>
                 <TransparentHeader title='Cart' goBack={this.props.navigation.goBack} />
-                {this.state.cart!= 0 ?
+                {this.state.cart.length!=0 ?
                     this.state.cart.map((product, index) => (
                         <ProductBox key={index} item_id={product.item_id} quantity={product.quantity}/>
                     )) : <Text style={{textAlign:'center',marginTop:'70%', fontSize:16}}>No item added yet</Text>}
