@@ -27,7 +27,6 @@ class CatalogCust extends Component {
           temp.id = child.key
           data.push(temp)
           this.setItems(data)
-          console.log(data)
         })
 
       });

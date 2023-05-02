@@ -31,19 +31,19 @@ class EditProductForm extends Component {
     getData = () => {
 
         database()
-      .ref('/Products/'+this.props.route.params.productId)
-      .on('value', (snapshot) => {
-        if(snapshot.exists()){
-            this.handleProductNameChange(snapshot.val().product_name)
-            this.handleProductPriceChange(snapshot.val().product_price)
-            this.handleProductDescriptionChange(snapshot.val().product_description)
-            this.handleProductImageChange(snapshot.val().product_image)
-        }
-        else{
-            return null
-        }
+            .ref('/Products/' + this.props.route.params.productId)
+            .on('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    this.handleProductNameChange(snapshot.val().product_name)
+                    this.handleProductPriceChange(snapshot.val().product_price)
+                    this.handleProductDescriptionChange(snapshot.val().product_description)
+                    this.handleProductImageChange(snapshot.val().product_image)
+                }
+                else {
+                    return null
+                }
 
-      });
+            });
 
     }
 
@@ -62,7 +62,7 @@ class EditProductForm extends Component {
     handleSubmit = () => {
 
         database()
-            .ref('/Products/'+this.props.route.params.productId)
+            .ref('/Products/' + this.props.route.params.productId)
             .update({
                 product_name: this.state.productName,
                 product_price: this.state.productPrice,
@@ -109,7 +109,7 @@ class EditProductForm extends Component {
                             <Text style={styles.chooseImgBtn}>Choose Image</Text>
                         </Pressable>
                     </View>
-                    <Pressable onPress={(this.state.productName!='' && this.state.productPrice!='' && this.state.productDescription!='')?this.handleSubmit:() => { alert('All field must be filled')}}>
+                    <Pressable onPress={(this.state.productName != '' && this.state.productPrice != '' && this.state.productDescription != '') ? this.handleSubmit : () => { alert('All field must be filled') }}>
                         <Text style={styles.submitBtn}>Save</Text>
                     </Pressable>
                 </View>

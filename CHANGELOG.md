@@ -24,6 +24,7 @@
 - Add Feedback UI
 - Add Feedback connection to firebase
 - Add Cart UI and connect to firebase
+- Add quantity increment in add to cart
 
 ## Fixed
 - Fixed UI Add New Product form
