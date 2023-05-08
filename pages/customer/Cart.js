@@ -7,6 +7,8 @@ import database from '@react-native-firebase/database';
 import OptionModal from '../../components/OptionModal';
 import Overlay from '../../components/Overlay';
 import ConfirmModal from '../../components/ConfirmModal';
+import CounterModal from "../../components/Catalog/CounterModal";
+import BigYellowButton from "../../components/BigYellowButton";
 
 class Cart extends Component {
 
@@ -18,8 +20,10 @@ class Cart extends Component {
         prodArr: [],
         modalVisible: false,
         confirmModalVisible: false,
+        counterModalVisible: false,
         cartBranchId: '',
         userBranchId: '',
+        quantity:''
 
     }
 
@@ -37,6 +41,8 @@ class Cart extends Component {
                         let tempCartId
 
                         if (child.val().uid == auth().currentUser.uid) {
+
+
 
                             if (child.val().cart != null) {
 
@@ -89,6 +95,10 @@ class Cart extends Component {
     setCart = (arr) => {
         this.setState({ cart: arr });
     }
+    
+    setQuantity = (quantity) => {
+        this.setState({ quantity });
+    }
 
     setTempCart = (arr) => {
         this.setState({ tempCart: arr });
@@ -108,6 +118,10 @@ class Cart extends Component {
 
     setConfirmModalVisible = (visible) => {
         this.setState({ confirmModalVisible: visible })
+    }
+
+    setCounterModalVisible = (visible) => {
+        this.setState({ counterModalVisible: visible })
     }
 
     setCartBranchId = (cartBranchId) => {
@@ -153,6 +167,19 @@ class Cart extends Component {
 
     }
 
+    updateQty = (inp) => {
+
+        database()
+            .ref('/Users/' + this.state.userBranchId + '/cart/' + this.state.cartBranchId)
+            .update({ quantity:inp })
+            .then(() => {
+                alert('Quantity updated successfully')
+            })
+        
+            this.setCounterModalVisible(!this.state.counterModalVisible)
+
+    }
+
 
     renderItems = () => {
 
@@ -192,12 +219,16 @@ class Cart extends Component {
 
         return (
 
-            <View style={{ flex: 1 }}>
-                <ScrollView>
-                    <TransparentHeader title='Cart' goBack={this.props.navigation.goBack} />
-                    {this.state.cart.length != 0 ?
-                        this.renderItems() : <Text style={{ textAlign: 'center', marginTop: '70%', fontSize: 16 }}>No item added yet</Text>}
-                </ScrollView>
+            <View style={{ flex: 1, }}>
+                <TransparentHeader title='Cart' goBack={this.props.navigation.goBack} />
+                <View style={{ flex: 1, padding:12 }}>
+                    <ScrollView>
+                        {this.state.cart.length != 0 ?
+                            this.renderItems() : <Text style={{ textAlign: 'center', marginTop: '70%', fontSize: 16 }}>No item added yet</Text>}
+                    </ScrollView>
+                    <BigYellowButton clickHandle={()=>console.log('Proceed to checkout')} btnText={'Proceed To Checkout'} />
+                </View>
+                
                 <OptionModal
                     modalVisible={this.state.modalVisible}
                     toggle={() => { this.setModalVisible(!this.state.modalVisible) }}
@@ -207,11 +238,11 @@ class Cart extends Component {
                     }}
                     secondOptFunc={() => {
 
-                        console.log('edit')
+                        this.setCounterModalVisible(!this.state.counterModalVisible)
 
                     }}
                     firstOptText='Delete Product'
-                    secondOptText='Edit Product'
+                    secondOptText='Edit Quantity'
                 />
                 <ConfirmModal
                     visible={this.state.confirmModalVisible}
@@ -221,6 +252,16 @@ class Cart extends Component {
                         this.setConfirmModalVisible(!this.state.confirmModalVisible)
                     }}
                     onCancel={() => this.setConfirmModalVisible(!this.state.confirmModalVisible)}
+                />
+
+                <CounterModal
+                    visible={this.state.counterModalVisible}
+                    warnText={'Enter item quantity'}
+                    onConfirm={this.updateQty}
+                    onCancel={() => {
+                        console.log('x jadi edit')
+                        this.setCounterModalVisible(!this.state.counterModalVisible)
+                    }}
                 />
                 <Overlay visible={this.state.modalVisible} />
             </View>

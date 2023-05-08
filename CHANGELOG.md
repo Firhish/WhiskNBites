@@ -26,6 +26,8 @@
 - Add Cart UI and connect to firebase
 - Add quantity increment in add to cart
 - Add Delete product from cart feature
+- Add edit quantity from cart feature
+
 
 ## Fixed
 - Fixed UI Add New Product form
