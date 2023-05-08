@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { SafeAreaView, Text, View, Dimensions, StyleSheet, Image, TouchableHighlight } from "react-native";
+import { SafeAreaView, Text, View, Dimensions, StyleSheet, Image, TouchableHighlight, ScrollView } from "react-native";
 import TransparentHeader from "../../components/TransparentHeader";
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
@@ -99,9 +99,7 @@ class CatalogIndCust extends Component {
                                     if(child.val().item_id==this.props.route.params.productId){
 
                                         this.setCartBranchId(child.key)
-                                        console.log(child.key)
                                         this.setQuantity(child.val().quantity)
-                                        console.log(this.state.quantity)
 
                                     }
                                     temp = child.val().item_id
@@ -109,14 +107,12 @@ class CatalogIndCust extends Component {
                                     this.setItemIdArr(data)
 
                                 })
-                                console.log(this.state.itemIdArr)
                           
 
                             }).then(() => {
 
                                 if (this.state.itemIdArr.includes(this.props.route.params.productId)) {
 
-                                    //update item quantity
                                     database()
                                         .ref('/Users/' + this.state.usersBranchId + '/cart/'+this.state.cartBranchId)
                                         .update({
@@ -129,7 +125,6 @@ class CatalogIndCust extends Component {
                                 }
                                 else {
 
-                                    //add new item
                                     database()
                                         .ref('/Users/' + this.state.usersBranchId + '/cart')
                                         .push()
@@ -141,45 +136,14 @@ class CatalogIndCust extends Component {
                                             alert('Product added to cart successfully')
                                             console.log('New item added')
                                         })
-
                                 }
-
-
                             });
-
-
-
-                        // database()
-                        //     .ref('/Users/' + this.state.usersBranchId + '/cart')
-                        //     .push()
-                        //     .set({
-                        //         item_id: this.props.route.params.productId,
-                        //         quantity: 1,
-                        //     })
-                        //     .then(() => {
-                        //         alert('Product added to cart successfully')
-                        //     })
-
                     }
                     else {
                         return null
                     }
                 })
             });
-
-        // database()
-        //     .ref('/Users/'+this.state.usersBranchId+'/cart')
-        //     .push()
-        //     .set({
-        //         item_id: this.props.route.params.productId,
-        //         quantity: 1,
-        //     })
-        //     .then(() => {
-        //         alert('Product added to cart successfully')
-        //     })
-
-        // console.log('add to cart')
-
     }
 
     render() {
@@ -193,7 +157,8 @@ class CatalogIndCust extends Component {
                     <View style={styles.textContainer}>
                         <Text style={styles.prodNameText}>{this.state.prodName}</Text>
                         <Text style={styles.prodPriceText}>{'RM ' + Number(this.state.prodPrice).toFixed(2)}</Text>
-                        <Text style={styles.prodDescText}>{this.state.prodDesc}</Text>
+                        <ScrollView><Text style={styles.prodDescText}>{this.state.prodDesc}</Text></ScrollView>
+                        
                     </View>
                     <View style={styles.btnContainer}>
                         <TouchableHighlight underlayColor={'transparent'} onPress={this.addToCart}>
@@ -267,7 +232,10 @@ const styles = StyleSheet.create({
 
     custFeedbackBtn: {
         textAlign: 'center',
-        marginTop: 15,
+        marginTop: 10,
+        marginBottom: 10,
+        fontSize:16,
+        color: '#DB9B06',
     }
 
 })

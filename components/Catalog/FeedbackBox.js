@@ -107,8 +107,9 @@ const styles = StyleSheet.create({
     },
 
     feedbackText: {
-        marginTop: 10,
+        marginTop: 20,
         fontSize: 18,
+        color:'black'
     },
 
 })
