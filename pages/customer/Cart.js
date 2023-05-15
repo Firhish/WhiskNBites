@@ -226,7 +226,7 @@ class Cart extends Component {
                         {this.state.cart.length != 0 ?
                             this.renderItems() : <Text style={{ textAlign: 'center', marginTop: '70%', fontSize: 16 }}>No item added yet</Text>}
                     </ScrollView>
-                    <BigYellowButton clickHandle={()=>console.log('Proceed to checkout')} btnText={'Proceed To Checkout'} />
+                    <BigYellowButton clickHandle={()=>this.props.navigation.navigate('CheckOut')} btnText={'Proceed To Checkout'} />
                 </View>
                 
                 <OptionModal

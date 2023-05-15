@@ -27,7 +27,7 @@
 - Add quantity increment in add to cart
 - Add Delete product from cart feature
 - Add edit quantity from cart feature
-
+- Add CheckOut UI
 
 ## Fixed
 - Fixed UI Add New Product form
