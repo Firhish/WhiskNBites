@@ -4,11 +4,17 @@ import { Modal, View, Text, TouchableHighlight,TouchableOpacity, StyleSheet } fr
 class CounterModal extends Component {
 
     state = {
-        count: 0
+        count: 1
     }
 
     handleMinusPress = () => {
-        this.setState({ count: this.state.count - 1 });
+        if(this.state.count==1){
+            return null
+        }
+        else{
+            this.setState({ count: this.state.count - 1 });
+        }
+        
     };
 
     handleAddPress = () => {
@@ -49,7 +55,7 @@ class CounterModal extends Component {
                                 underlayColor={'transparent'}
                                 onPress={() => {
                                     onCancel();
-                                    this.setState({count:0})
+                                    this.setState({count:1})
                                 }}
                                 style={styles.cancelBtn}>
                                 <Text style={styles.cancelBtnText}>
@@ -60,7 +66,7 @@ class CounterModal extends Component {
                                 underlayColor={'transparent'}
                                 onPress={() => {
                                     onConfirm(this.state.count);
-                                    this.setState({count:0})
+                                    this.setState({count:1})
                                 }}
                                 style={styles.confirmBtn}>
                                 <Text style={styles.confirmBtnText}>
