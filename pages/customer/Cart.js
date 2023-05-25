@@ -23,7 +23,7 @@ class Cart extends Component {
         counterModalVisible: false,
         cartBranchId: '',
         userBranchId: '',
-        quantity:''
+        quantity: ''
 
     }
 
@@ -58,6 +58,7 @@ class Cart extends Component {
 
                                 }
                                 this.setCart(tempCart)
+                                // console.log(tempCart)
                             }
                             else {
                                 this.setCart([])
@@ -84,6 +85,7 @@ class Cart extends Component {
                         temp.id = child.key
                         data.push(temp)
                         this.setProdArr(data)
+                        // console.log(this.state.prodArr)
                     })
                 }
                 else {
@@ -95,7 +97,7 @@ class Cart extends Component {
     setCart = (arr) => {
         this.setState({ cart: arr });
     }
-    
+
     setQuantity = (quantity) => {
         this.setState({ quantity });
     }
@@ -171,12 +173,12 @@ class Cart extends Component {
 
         database()
             .ref('/Users/' + this.state.userBranchId + '/cart/' + this.state.cartBranchId)
-            .update({ quantity:inp })
+            .update({ quantity: inp })
             .then(() => {
                 alert('Quantity updated successfully')
             })
-        
-            this.setCounterModalVisible(!this.state.counterModalVisible)
+
+        this.setCounterModalVisible(!this.state.counterModalVisible)
 
     }
 
@@ -221,14 +223,31 @@ class Cart extends Component {
 
             <View style={{ flex: 1, }}>
                 <TransparentHeader title='Cart' goBack={this.props.navigation.goBack} />
-                <View style={{ flex: 1, padding:12 }}>
+                <View style={{ flex: 1, padding: 12 }}>
                     <ScrollView>
                         {this.state.cart.length != 0 ?
                             this.renderItems() : <Text style={{ textAlign: 'center', marginTop: '70%', fontSize: 16 }}>No item added yet</Text>}
                     </ScrollView>
-                    <BigYellowButton clickHandle={()=>this.props.navigation.navigate('CheckOut')} btnText={'Proceed To Checkout'} />
+                    <BigYellowButton clickHandle={() => {
+
+
+                        if (this.state.cart.length != 0) {
+
+                            this.props.navigation.navigate('CheckOut')
+
+                        }
+                        else {
+                            alert('Please add item(s) in your cart to checkout')
+                        }
+
+                        // this.props.navigation.navigate('CheckOut')
+
+
+                    }
+
+                    } btnText={'Proceed To Checkout'} />
                 </View>
-                
+
                 <OptionModal
                     modalVisible={this.state.modalVisible}
                     toggle={() => { this.setModalVisible(!this.state.modalVisible) }}

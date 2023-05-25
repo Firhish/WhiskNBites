@@ -28,6 +28,8 @@
 - Add Delete product from cart feature
 - Add edit quantity from cart feature
 - Add CheckOut UI
+- Add checkout connection to fb (not finalize)
+- Add empty cart exception before go to checkout
 
 ## Fixed
 - Fixed UI Add New Product form
