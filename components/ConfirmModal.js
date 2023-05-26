@@ -75,12 +75,13 @@ const styles = StyleSheet.create({
   },
 
   warnText:{
-    marginTop: 10 
+    marginTop: 30, 
+    fontSize:16,
   },
 
   btnContainer:{
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: 30,
   },
 
   cancelBtn:{

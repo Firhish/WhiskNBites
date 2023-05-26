@@ -9,7 +9,6 @@ class TabHeader extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <Pressable onPress={this.props.iconClickHandle} style={styles.icon}>{icon && <Ionicons name={icon} size={28} color="white"  />}</Pressable>
-        {/* {icon && <Ionicons name={icon} size={28} color="white" style={styles.icon} />} */}
       </View>
     );
   }
@@ -21,7 +20,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#DB9B06',
     alignItems: 'center',
     flexDirection: 'row',
-    marginBottom: 30,
   },
   title: {
     flex: 1,
