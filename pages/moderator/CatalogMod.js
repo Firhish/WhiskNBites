@@ -36,7 +36,6 @@ class CatalogMod extends Component {
             temp.id = child.key
             data.push(temp)
             this.setItems(data)
-            console.log(data)
           })
         }
         else {
@@ -87,7 +86,7 @@ class CatalogMod extends Component {
 
 
   renderItem = ({ id, product_name, product_price, product_image }) => (
-    <Pressable key={id} onPress={()=>{this.props.navigation.navigate('CatalogIndMod',{productId: id})}} onLongPress={() => {
+    <Pressable key={id} onPress={() => { this.props.navigation.navigate('CatalogIndMod', { productId: id }) }} onLongPress={() => {
       this.setModalVisible(!this.state.modalVisible)
       this.setItemsId(id)
     }}>

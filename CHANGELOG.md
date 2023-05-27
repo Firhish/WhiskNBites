@@ -31,6 +31,7 @@
 - Add checkout connection to fb (not finalize)
 - Add empty cart exception before go to checkout
 - Add Profile Cust UI
+- Add Profile Cust connection to fb
 
 ## Fixed
 - Fixed UI Add New Product form

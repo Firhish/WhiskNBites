@@ -1,6 +1,6 @@
-import { createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Component } from "react";
-import {Text} from "react-native";
+import { Text } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 //Screens
@@ -25,6 +25,7 @@ class TabsMod extends Component {
             <bottomNav.Navigator
                 initialRouteName={promotionName}
                 screenOptions={({ route }) => ({
+                    unmountOnBlur: true,
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;
                         let rn = route.name;
