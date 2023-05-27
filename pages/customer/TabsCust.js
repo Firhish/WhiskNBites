@@ -25,6 +25,7 @@ class TabsCust extends Component {
             <bottomNav.Navigator
                 initialRouteName={promotionName}
                 screenOptions={({ route }) => ({
+                    unmountOnBlur:true,
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;
                         let rn = route.name;

@@ -2,56 +2,53 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, Button, Image, StyleSheet, Pressable } from 'react-native';
 import database from '@react-native-firebase/database';
 import TransparentHeader from '../../components/TransparentHeader';
+import auth from '@react-native-firebase/auth';
 
 class EditProfileCust extends Component {
 
     state = {
-        productName: '',
-        productPrice: '',
-        productImage: null,
-        productDescription: '',
+        username: '',
+        phone: '',
+        profilePic: null,
+        userBranchId: '',
     };
 
-    handleProductNameChange = productName => {
-        this.setState({ productName });
-    };
+    setProfilePic = (profilePic) => {
+        this.setState({ profilePic })
+    }
 
-    handleProductPriceChange = productPrice => {
-        this.setState({ productPrice });
-    };
+    setUsername = (username) => {
+        this.setState({ username })
+    }
 
-    handleProductImageChange = productImage => {
-        this.setState({ productImage });
-    };
+    setPhone = (phone) => {
+        this.setState({ phone })
+    }
 
-    handleProductDescriptionChange = productDescription => {
-        this.setState({ productDescription });
-    };
+    setUserBranchId = (userBranchId) => {
+        this.setState({ userBranchId })
+    }
 
     getData = () => {
 
-        // database()
-        //     .ref('/Products/' + this.props.route.params.productId)
-        //     .on('value', (snapshot) => {
-        //         if (snapshot.exists()) {
-        //             this.handleProductNameChange(snapshot.val().product_name)
-        //             this.handleProductPriceChange(snapshot.val().product_price)
-        //             this.handleProductDescriptionChange(snapshot.val().product_description)
-        //             this.handleProductImageChange(snapshot.val().product_image)
-        //         }
-        //         else {
-        //             return null
-        //         }
+        database()
+            .ref('/Users')
+            .on('value', (snapshot) => {
+                snapshot.forEach((child) => {
 
-        //     });
+                    if (child.val().uid == auth().currentUser.uid) {
 
+                        this.setProfilePic(child.val().dp_url)
+                        this.setUsername(child.val().username)
+                        this.setPhone(child.val().phone_no)
+                        this.setUserBranchId(child.key)
+                    }
+                })
+            });
     }
 
     componentDidMount() {
-
-        // this.getData()
-        // console.log(this.state.productName)
-
+        this.getData()
     }
 
     pickImage = () => {
@@ -61,19 +58,16 @@ class EditProfileCust extends Component {
 
     handleSubmit = () => {
 
-        // database()
-        //     .ref('/Products/' + this.props.route.params.productId)
-        //     .update({
-        //         product_name: this.state.productName,
-        //         product_price: this.state.productPrice,
-        //         product_image: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/almondLondon.jpg?alt=media&token=4d342545-4f84-435b-91b3-461ce530b15f',
-        //         product_description: this.state.productDescription,
-        //     })
-        //     .then(() => {
-
-        //         this.props.navigation.navigate('TabsMod');
-        //         alert('Product updated successfully')
-        //     });
+        database()
+            .ref('/Users/' + this.state.userBranchId)
+            .update({
+                username: this.state.username,
+                phone_no: this.state.phone,
+            })
+            .then(() => {
+                this.props.navigation.navigate('TabsCust');
+                alert('Profile updated successfully')
+            });
     };
 
     render() {
@@ -85,23 +79,17 @@ class EditProfileCust extends Component {
                         <Text style={{ fontSize: 22, marginVertical: 30, }}>Enter personal information</Text>
                         <TextInput
                             style={styles.input}
-                            onChangeText={this.handleProductNameChange}
-                            value={this.state.productName}
+                            onChangeText={this.setUsername}
+                            value={this.state.username}
                             placeholder='Username'
                         />
                         <TextInput
                             style={styles.input}
-                            onChangeText={this.handleProductPriceChange}
-                            value={this.state.productPrice}
+                            onChangeText={this.setPhone}
+                            value={this.state.phone}
                             keyboardType="numeric"
                             placeholder='Phone Number'
                         />
-                        {/* <TextInput
-                            style={styles.input}
-                            onChangeText={this.handleProductDescriptionChange}
-                            value={this.state.productDescription}
-                            placeholder='Product Description'
-                        /> */}
                         {this.state.productImage && (
                             <Image style={styles.image} source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/almondLondon.jpg?alt=media&token=4d342545-4f84-435b-91b3-461ce530b15f' }} />
                         )}
