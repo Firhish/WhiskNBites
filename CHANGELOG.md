@@ -32,6 +32,7 @@
 - Add empty cart exception before go to checkout
 - Add Profile Cust UI
 - Add Profile Cust connection to fb
+- Add Profile Mod UI and connection to fb
 
 ## Fixed
 - Fixed UI Add New Product form

@@ -18,6 +18,7 @@ import Feedbacks from "./pages/Feedbacks";
 import Cart from "./pages/customer/Cart";
 import CheckOut from "./pages/customer/CheckOut";
 import EditProfileCust from "./pages/customer/EditProfileCust";
+import ViewProfileMod from "./pages/moderator/ViewProfileMod";
 
 
 const Stack = createNativeStackNavigator();
@@ -42,6 +43,7 @@ class App extends Component {
         <Stack.Screen name='Cart' component={Cart} options={{headerShown:false}}/>
         <Stack.Screen name='CheckOut' component={CheckOut} options={{headerShown:false}}/>
         <Stack.Screen name='EditProfileCust' component={EditProfileCust} options={{headerShown:false}}/>
+        <Stack.Screen name='ViewProfileMod' component={ViewProfileMod} options={{headerShown:false}}/>
         </Stack.Navigator>
 
       </NavigationContainer>
