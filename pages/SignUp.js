@@ -33,7 +33,9 @@ class SignUp extends Component {
                         phone_no: this.state.phoneVal,
                         username: this.state.usernameVal,
                         uid: auth().currentUser.uid,
-                        user_type: 'customer', 
+                        user_type: 'customer',
+                        timestamp: Date.now(), 
+                        dp_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT23NlA9taxcUhdcm3JbbPqRoNfn5m9gxVjQ&usqp=CAU'
                     })
                     .then(() => {
                         this.props.navigation.navigate('TabsCust');

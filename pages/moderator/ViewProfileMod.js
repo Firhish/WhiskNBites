@@ -1,19 +1,12 @@
 import { Component } from "react";
 import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
-import TabHeader from "../../components/TabHeader";
-import auth from '@react-native-firebase/auth';
-import ConfirmModal from '../../components/ConfirmModal';
 import Divider from "../../components/Divider";
-import OptionModal from '../../components/OptionModal';
-import Overlay from '../../components/Overlay';
 import database from '@react-native-firebase/database';
+import TransparentHeader from "../../components/TransparentHeader";
 
-class ProfileCust extends Component {
+class ViewProfileMod extends Component {
 
     state = {
-
-        modalVisible: false,
-        confirmModalVisible: false,
         coverPic: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/backgroundProfile.png?alt=media&token=37e93e89-8a5e-4472-90df-2731a7dfaf63',
         profilePic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT23NlA9taxcUhdcm3JbbPqRoNfn5m9gxVjQ&usqp=CAU',
         username: '',
@@ -54,7 +47,7 @@ class ProfileCust extends Component {
             .on('value', (snapshot) => {
                 snapshot.forEach((child) => {
 
-                    if (child.val().uid == auth().currentUser.uid) {
+                    if (child.val().uid == this.props.route.params.uid) {
 
                         this.setProfilePic(child.val().dp_url)
                         this.setUsername(child.val().username)
@@ -69,23 +62,13 @@ class ProfileCust extends Component {
         this.getData()
     }
 
-    signOut = () => {
-
-        auth()
-            .signOut()
-            .then(() => {
-                this.props.navigation.navigate('Landing')
-                console.log('User signed out!')
-            });
-    }
 
     render() {
 
         return (
 
             <SafeAreaView style={{ flex: 1 }}>
-
-                <TabHeader title='Profile' icon='menu' iconClickHandle={() => this.setModalVisible(!this.state.modalVisible)} />
+                <TransparentHeader goBack={this.props.navigation.goBack} />
                 <View style={{ flex: 1 }}>
                     <View>
                         <Image source={{ uri: this.state.coverPic }} style={styles.coverPic} />
@@ -107,30 +90,6 @@ class ProfileCust extends Component {
                     </View>
                     <Divider />
                 </View>
-                <OptionModal
-                    modalVisible={this.state.modalVisible}
-                    toggle={() => { this.setModalVisible(!this.state.modalVisible) }}
-                    firstOptFunc={() => {
-                        this.setConfirmModalVisible(!this.state.confirmModalVisible)
-                    }}
-                    secondOptFunc={() => {
-                        this.props.navigation.navigate('EditProfileCust')
-                    }}
-                    firstOptText='Log Out'
-                    secondOptText='Edit Profile'
-                />
-
-                <ConfirmModal
-                    visible={this.state.confirmModalVisible}
-                    warnText={'Are you sure you want to log out?'}
-                    onConfirm={() => {
-                        this.signOut()
-                        this.setConfirmModalVisible(!this.state.confirmModalVisible)
-                    }}
-                    onCancel={() => this.setConfirmModalVisible(!this.state.confirmModalVisible)}
-                />
-                <Overlay visible={this.state.modalVisible} />
-
             </SafeAreaView>
 
         )
@@ -170,8 +129,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 
-
-
 })
 
-export default ProfileCust
+export default ViewProfileMod
