@@ -19,6 +19,9 @@ import Cart from "./pages/customer/Cart";
 import CheckOut from "./pages/customer/CheckOut";
 import EditProfileCust from "./pages/customer/EditProfileCust";
 import ViewProfileMod from "./pages/moderator/ViewProfileMod";
+import TabsOrderCust from "./pages/customer/TabsOrderCust";
+import ToReceiveOrder from "./pages/customer/ToReceiveOrder";
+import CompletedOrder from "./pages/customer/CompletedOrder";
 
 
 const Stack = createNativeStackNavigator();
@@ -44,6 +47,10 @@ class App extends Component {
         <Stack.Screen name='CheckOut' component={CheckOut} options={{headerShown:false}}/>
         <Stack.Screen name='EditProfileCust' component={EditProfileCust} options={{headerShown:false}}/>
         <Stack.Screen name='ViewProfileMod' component={ViewProfileMod} options={{headerShown:false}}/>
+        <Stack.Screen name='TabsOrderCust' component={TabsOrderCust} options={{headerShown:false}}/>
+        <Stack.Screen name='ToReceiveOrder' component={ToReceiveOrder} options={{headerShown:false}}/>
+        <Stack.Screen name='CompletedOrder' component={CompletedOrder} options={{headerShown:false}}/>
+        
         </Stack.Navigator>
 
       </NavigationContainer>
