@@ -1,18 +1,21 @@
 import { Component } from "react";
 import { SafeAreaView, Text } from "react-native";
-import TabHeader from "../../components/TabHeader";
 
-class OrderCust extends Component {
+class CompletedOrder extends Component {
+
+    componentDidMount() {
+        console.log('complete focus')
+    }
 
     render() {
 
         return (
 
             <SafeAreaView>
-                <Text>OrderCust</Text>
+                <Text>CompletedOrder</Text>
             </SafeAreaView>
         )
     }
 }
 
-export default OrderCust
+export default CompletedOrder

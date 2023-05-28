@@ -33,6 +33,7 @@
 - Add Profile Cust UI
 - Add Profile Cust connection to fb
 - Add Profile Mod UI and connection to fb
+- Add tab navigator on Order Cust
 
 ## Fixed
 - Fixed UI Add New Product form
