@@ -1,6 +1,7 @@
 import { Component } from "react";
-import { SafeAreaView, Text } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 import TabHeader from "../../components/TabHeader";
+import TabsOrderCust from "./TabsOrderCust";
 
 class OrderCust extends Component {
 
@@ -8,9 +9,11 @@ class OrderCust extends Component {
 
         return (
 
-            <SafeAreaView>
-                <Text>OrderCust</Text>
-            </SafeAreaView>
+            <>
+                <TabHeader title='Order' iconClickHandle={()=>{}} />
+                <TabsOrderCust />
+            </>
+
         )
     }
 }

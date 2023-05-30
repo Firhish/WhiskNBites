@@ -55,7 +55,8 @@ class TabsCust extends Component {
             >
                 <bottomNav.Screen name={promotionName} component={PromotionCust} options={{ headerShown: false }} />
                 <bottomNav.Screen name={catalogName} component={CatalogCust} options={{ headerShown: false }} />
-                <bottomNav.Screen name={orderName} component={TabsOrderCust} options={{ headerShown: false }} />
+                {/* <bottomNav.Screen name={orderName} component={TabsOrderCust} options={{ headerShown: false }} /> */}
+                <bottomNav.Screen name={orderName} component={OrderCust} options={{ headerShown: false }} />
                 <bottomNav.Screen name={profileName} component={ProfileCust} options={{ headerShown: false }} />
             </bottomNav.Navigator>
         );

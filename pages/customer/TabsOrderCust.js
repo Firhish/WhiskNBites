@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import OrderCust from './OrderCust';
 import { View, Text } from 'react-native';
 import ToReceiveOrder from './ToReceiveOrder';
 import CompletedOrder from './CompletedOrder';

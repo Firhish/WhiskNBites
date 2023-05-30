@@ -3,10 +3,6 @@ import { SafeAreaView, Text } from "react-native";
 
 class CompletedOrder extends Component {
 
-    componentDidMount() {
-        console.log('complete focus')
-    }
-
     render() {
 
         return (
