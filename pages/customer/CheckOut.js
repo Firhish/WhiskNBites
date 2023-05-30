@@ -20,8 +20,15 @@ class CheckOut extends Component {
         merchandiseSubtotal: 0,
         shippingSubtotal: 4.82,
         totalPayment: 0,
+        userBranchId: ''
 
     };
+
+    setUserBranchId = (userBranchId) => [
+
+        this.setState({ userBranchId })
+
+    ]
 
 
     setBillingAddress = (billingAddress) => {
@@ -99,6 +106,9 @@ class CheckOut extends Component {
 
                                 if (child.val().uid == auth().currentUser.uid) {
 
+                                    this.setUserBranchId(child.key)
+                                    console.log(this.state.userBranchId)
+
                                     if (child.val().cart != null) {
 
                                         this.setCartArr(Object.values(child.val().cart))
@@ -123,12 +133,12 @@ class CheckOut extends Component {
 
 
                                     tempProductArr[i].quantity = cartArr[j].quantity
-                                    // console.log(tempProductArr)
+
                                 }
 
                                 else {
 
-                                    // console.log('tak sama')
+
 
                                 }
 
@@ -143,7 +153,7 @@ class CheckOut extends Component {
 
                                 tempProductArr.splice(i, 1)
 
-                                // console.log(tempProductArr[i].product_name)
+
 
                             }
 
@@ -161,8 +171,7 @@ class CheckOut extends Component {
 
                         this.getMerchandiseSubtotal()
                         this.getTotalPayment()
-                        // console.log(cartArr)
-                        // console.log(productArr)
+
 
                     });
 
@@ -196,7 +205,40 @@ class CheckOut extends Component {
         sum = merchandiseSubtotal + shippingSubtotal
 
         this.setTotalPayment(sum)
-        // console.log('total payment: '+ sum)
+
+
+
+    }
+
+    placeOrder = () => {
+
+
+        database()
+            .ref('/Orders/')
+            .push({
+
+                uid: auth().currentUser.uid,
+                cart: this.state.cartArr,
+                billingName: this.state.billingName,
+                billingAddress: this.state.billingAddress,
+                merchandiseSubtotal: this.state.merchandiseSubtotal,
+                shippingSubtotal: this.state.shippingSubtotal,
+                totalPayment: this.state.totalPayment,
+                timestamp: Date.now(),
+
+            })
+            .then(async () => {
+
+                database()
+                    .ref('/Users/' + this.state.userBranchId + '/cart')
+                    .remove()
+                    .then(() => {
+                        this.props.navigation.navigate('TabsCust');
+                        alert('Your order has been placed')
+                    })
+
+
+            });
 
 
     }
@@ -263,7 +305,12 @@ class CheckOut extends Component {
                         </View>
 
                     </ScrollView>
-                    <BigYellowButton clickHandle={() => console.log('place order')} btnText={'Place Order'} />
+                    <BigYellowButton clickHandle={() => {
+
+                        this.state.billingName && this.state.billingAddress ?
+                            this.placeOrder() : alert('All field must be filled')
+
+                    }} btnText={'Place Order'} />
                 </View>
             </View>
 
