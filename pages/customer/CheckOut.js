@@ -93,9 +93,7 @@ class CheckOut extends Component {
                         temp.id = child.key
                         data.push(temp)
                         this.setProductArr(data)
-
                     })
-
 
                 }
                 else {
@@ -114,7 +112,6 @@ class CheckOut extends Component {
                                 if (child.val().uid == auth().currentUser.uid) {
 
                                     this.setUserBranchId(child.key)
-                                    console.log(this.state.userBranchId)
 
                                     if (child.val().cart != null) {
 
@@ -127,63 +124,38 @@ class CheckOut extends Component {
                         }
                     }).then(() => {
 
-                        const { productArr, cartArr } = this.state
-
-                        let tempProductArr = productArr
-
-                        for (i = 0; i < tempProductArr.length; i++) {
-
-                            for (j = 0; j < cartArr.length; j++) {
-
-
-                                if (tempProductArr[i].id == cartArr[j].item_id) {
-
-
-                                    tempProductArr[i].quantity = cartArr[j].quantity
-
-                                }
-
-                                else {
-
-
-
-                                }
-
-                            }
-
-
-                        }
-
-                        for (i = 0; i < tempProductArr.length; i++) {
-
-                            if (tempProductArr[i].quantity == null) {
-
-                                tempProductArr.splice(i, 1)
-
-
-
-                            }
-
-                        }
-
-                        if (cartArr.length == 0) {
-
-                            tempProductArr = []
-                            console.log('MASUKKKK')
-                        }
-
-                        this.setProductArr(tempProductArr)
-
-
-
                         this.getMerchandiseSubtotal()
                         this.getTotalPayment()
 
+                    })
 
-                    });
+
 
             });
 
+
+    }
+
+    getProductData = (itemId) => {
+
+
+        const { productArr, cart } = this.state
+        let newData = {}
+
+        for (i = 0; i < productArr.length; i++) {
+
+            if (productArr[i].id == itemId) {
+
+                newData.product_name = productArr[i].product_name
+                newData.product_image = productArr[i].product_image
+                newData.product_price = productArr[i].product_price
+
+            }
+
+
+        }
+
+        return newData
     }
 
     componentDidMount() {
@@ -192,13 +164,20 @@ class CheckOut extends Component {
 
     getMerchandiseSubtotal = () => {
 
-        const { productArr } = this.state
+
+        const { cartArr, productArr } = this.state
         let sum = 0
 
         for (i = 0; i < productArr.length; i++) {
 
-            sum = sum + (productArr[i].product_price * productArr[i].quantity)
+            for (j = 0; j < cartArr.length; j++) {
 
+                if (productArr[i].id == cartArr[j].item_id) {
+
+                    sum = sum + parseFloat(productArr[i].product_price) * parseFloat(cartArr[j].quantity)
+
+                }
+            }
         }
 
         this.setMerchandiseSubtotal(sum)
@@ -207,9 +186,11 @@ class CheckOut extends Component {
 
     getTotalPayment = () => {
 
+        let sum = 0
+
         const { merchandiseSubtotal, shippingSubtotal } = this.state
 
-        sum = merchandiseSubtotal + shippingSubtotal
+        sum = parseFloat(merchandiseSubtotal) + parseFloat(shippingSubtotal)
 
         this.setTotalPayment(sum)
 
@@ -289,13 +270,13 @@ class CheckOut extends Component {
                         </View>
 
 
-                        {this.state.productArr.map((product, index) => (
+                        {this.state.cartArr.map((product, index) => (
 
                             <ProductBox
                                 key={index}
-                                prodName={product.product_name}
-                                prodPrice={product.product_price}
-                                prodImage={product.product_image}
+                                prodName={this.getProductData(product.item_id).product_name}
+                                prodPrice={this.getProductData(product.item_id).product_price}
+                                prodImage={this.getProductData(product.item_id).product_image}
                                 quantity={product.quantity}
 
                             />
