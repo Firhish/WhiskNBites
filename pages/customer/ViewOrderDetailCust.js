@@ -144,7 +144,7 @@ class ViewOrderDetailCust extends Component {
                         <Text style={styles.orderId}>{'Order ID: ' + this.props.route.params.orderId}</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text>Order Time</Text>
-                            <Text>{moment(this.state.orderData.timestamp).format('D-MM-Y H:m:s')}</Text>
+                            <Text>{moment(this.state.orderData.timestamp).format('D-MM-Y H:m')}</Text>
                         </View>
                     </View>
 
