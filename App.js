@@ -22,6 +22,7 @@ import ViewProfileMod from "./pages/moderator/ViewProfileMod";
 import TabsOrderCust from "./pages/customer/TabsOrderCust";
 import ToReceiveOrder from "./pages/customer/ToReceiveOrder";
 import CompletedOrder from "./pages/customer/CompletedOrder";
+import ViewOrderDetailCust from "./pages/customer/ViewOrderDetailCust";
 
 
 const Stack = createNativeStackNavigator();
@@ -50,6 +51,7 @@ class App extends Component {
         <Stack.Screen name='TabsOrderCust' component={TabsOrderCust} options={{headerShown:false}}/>
         <Stack.Screen name='ToReceiveOrder' component={ToReceiveOrder} options={{headerShown:false}}/>
         <Stack.Screen name='CompletedOrder' component={CompletedOrder} options={{headerShown:false}}/>
+        <Stack.Screen name='ViewOrderDetailCust' component={ViewOrderDetailCust} options={{headerShown:false}}/>
         
         </Stack.Navigator>
 

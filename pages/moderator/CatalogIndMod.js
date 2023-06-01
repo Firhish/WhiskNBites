@@ -62,7 +62,7 @@ class CatalogIndMod extends Component {
         return (
 
             <View style={styles.mainContainer}>
-                <TransparentHeader goBack={this.props.navigation.goBack} />
+                <TransparentHeader title='Product Details' goBack={this.props.navigation.goBack} />
                 <Image source={{ uri: this.state.prodImage }} style={styles.image} />
                 <View style={styles.spaceContainer}>
                     <View style={styles.textContainer}>
