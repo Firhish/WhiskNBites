@@ -14,6 +14,7 @@ class CheckOut extends Component {
 
         billingName: '',
         billingAddress: '',
+        recepientPhone: '',
         productArr: [],
         cartArr: [],
         testTemp: [],
@@ -40,6 +41,12 @@ class CheckOut extends Component {
     setBillingName = (billingName) => {
 
         this.setState({ billingName })
+
+    }
+
+    setRecipientPhone = (recepientPhone) => {
+
+        this.setState({ recepientPhone })
 
     }
 
@@ -221,6 +228,7 @@ class CheckOut extends Component {
                 cart: this.state.cartArr,
                 billingName: this.state.billingName,
                 billingAddress: this.state.billingAddress,
+                recepientPhone: this.state.recepientPhone,
                 merchandiseSubtotal: this.state.merchandiseSubtotal,
                 shippingSubtotal: this.state.shippingSubtotal,
                 totalPayment: this.state.totalPayment,
@@ -261,6 +269,13 @@ class CheckOut extends Component {
                                 value={this.state.billingName}
                                 onChangeText={this.setBillingName}
                                 style={styles.inputName}
+                            />
+                            <TextInput
+                                placeholder="Recepient Phone Number"
+                                value={this.state.recepientPhone}
+                                onChangeText={this.setRecipientPhone}
+                                style={[styles.inputName, { marginTop: 15 }]}
+                                keyboardType="numeric"
                             />
                             <TextInput
                                 placeholder="Billing Address "
@@ -307,7 +322,7 @@ class CheckOut extends Component {
                     </ScrollView>
                     <BigYellowButton clickHandle={() => {
 
-                        this.state.billingName && this.state.billingAddress ?
+                        this.state.billingName && this.state.billingAddress && this.state.recepientPhone ?
                             this.placeOrder() : alert('All field must be filled')
 
                     }} btnText={'Place Order'} />

@@ -35,7 +35,7 @@ class ToReceiveOrder extends Component {
                         }
 
                         else {
-                            this.setOrderArr([])
+                            return null
                         }
 
                     })
@@ -44,7 +44,7 @@ class ToReceiveOrder extends Component {
                 }
 
                 else {
-                    return null
+                    this.setOrderArr([])
                 }
             });
 
@@ -56,7 +56,7 @@ class ToReceiveOrder extends Component {
 
     viewOrderDetail = (orderId) => {
 
-        console.log('View Order Detail: ' + orderId)
+        this.props.navigation.navigate('ViewOrderDetailCust', { orderId: orderId })
 
     }
 
