@@ -62,14 +62,40 @@ class ToReceiveOrder extends Component {
 
     moveToArchive = (orderId) => {
 
+        let deleted
+
         console.log('Move to archive: ' + orderId)
 
         database()
             .ref('/Orders/' + orderId)
-            .remove()
-            .then(() => {
-                alert('Order received successfully')
-            })
+            .once('value', (snapshot) => {
+                if (snapshot.exists()) {
+
+                    deleted = snapshot.val()
+                    deleted.status = 'COMPLETED'
+
+                }
+
+            }).then(() => {
+
+                database()
+                    .ref('/Archived_Orders/' + orderId)
+                    .update(deleted)
+                    .then(async () => {
+
+                        database()
+                            .ref('/Orders/' + orderId)
+                            .remove()
+                            .then(() => {
+                                alert('Order received successfully')
+                            })
+
+                    })
+
+
+            });
+
+
 
     }
 
@@ -86,6 +112,7 @@ class ToReceiveOrder extends Component {
                                 orderId={order.orderId}
                                 totalPayment={order.totalPayment}
                                 cart={order.cart}
+                                status={order.status}
                                 onPressBtn={() => this.moveToArchive(order.orderId)}
                             />
                         </Pressable>
