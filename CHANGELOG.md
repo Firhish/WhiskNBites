@@ -36,6 +36,7 @@
 - Add tab navigator on Order Cust
 - Add Order cust (order received) UI and connection
 - Add View Order Details UI and connection
+- Add Order cust (Completed) UI and connection
 
 ## Fixed
 - Fixed UI Add New Product form

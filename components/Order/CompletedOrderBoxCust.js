@@ -5,7 +5,7 @@ import database from '@react-native-firebase/database';
 import Divider from '../Divider';
 import StatusLabel from './StatusLabel';
 
-class ToReceiveBoxCust extends Component {
+class CompletedOrderBoxCust extends Component {
 
     state = {
 
@@ -62,6 +62,8 @@ class ToReceiveBoxCust extends Component {
 
     }
 
+
+
     render() {
 
         return (
@@ -88,10 +90,9 @@ class ToReceiveBoxCust extends Component {
                 <Divider />
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 12, alignItems: 'center' }}>
+
                     <StatusLabel status={this.props.status} />
-                    <Pressable onPress={this.props.onPressBtn}>
-                        <View style={styles.orderReceivedBtnContainer}><Text style={styles.btnText}>Order Received</Text></View>
-                    </Pressable>
+
                 </View>
 
 
@@ -103,7 +104,7 @@ class ToReceiveBoxCust extends Component {
 
 }
 
-export default ToReceiveBoxCust
+export default CompletedOrderBoxCust
 
 const styles = StyleSheet.create({
 

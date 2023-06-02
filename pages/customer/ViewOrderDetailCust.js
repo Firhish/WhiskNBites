@@ -36,21 +36,46 @@ class ViewOrderDetailCust extends Component {
 
     getData() {
 
-        database()
-            .ref('/Orders/' + this.props.route.params.orderId)
-            .on('value', (snapshot) => {
-                if (snapshot.exists()) {
+        if (this.props.route.params.status == 'COMPLETED') {
 
-                    this.setOrderData(snapshot.val())
-                    this.setCart(snapshot.val().cart)
+            database()
+                .ref('/Archived_Orders/' + this.props.route.params.orderId)
+                .on('value', (snapshot) => {
+                    if (snapshot.exists()) {
+
+                        this.setOrderData(snapshot.val())
+                        this.setCart(snapshot.val().cart)
 
 
-                }
+                    }
 
-                else {
-                    return null
-                }
-            });
+                    else {
+                        return null
+                    }
+                });
+
+        }
+
+        else {
+
+            database()
+                .ref('/Orders/' + this.props.route.params.orderId)
+                .on('value', (snapshot) => {
+                    if (snapshot.exists()) {
+
+                        this.setOrderData(snapshot.val())
+                        this.setCart(snapshot.val().cart)
+
+                    }
+
+                    else {
+                        return null
+                    }
+                });
+
+        }
+
+
 
         database()
             .ref('/Products')
@@ -63,7 +88,6 @@ class ViewOrderDetailCust extends Component {
                         temp.id = child.key
                         data.push(temp)
                         this.setProdArr(data)
-                        console.log(this.state.prodArr)
                     })
                 }
                 else {
@@ -146,6 +170,10 @@ class ViewOrderDetailCust extends Component {
                             <Text>Order Time</Text>
                             <Text>{moment(this.state.orderData.timestamp).format('D-MM-Y H:m')}</Text>
                         </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text>Order Status</Text>
+                            <Text>{this.state.orderData.status}</Text>
+                        </View>
                     </View>
 
                     <View style={styles.section}>
@@ -169,24 +197,6 @@ class ViewOrderDetailCust extends Component {
                         {this.state.cart.length != 0 ?
                             this.renderItems() : null}
 
-                        {/* <View style={styles.merchBox}>
-                            
-                            <Image style={styles.image} source={this.props.prodImage ? { uri: this.props.prodImage } : { uri: this.state.prodImage }} />
-
-                            <View style={{flex:1}}>
-
-                                <Text style={styles.productName}>Almond London</Text>
-                                <Text style={styles.productPrice}>RM 13.00</Text>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <View></View>
-                                    <Text style={styles.productQuantity}>x1</Text>
-                                </View>
-
-
-                            </View>
-
-
-                        </View> */}
                     </View>
 
                     <View style={[styles.section, { marginBottom: 30 }]}>

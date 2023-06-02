@@ -214,6 +214,7 @@ class CheckOut extends Component {
                 shippingSubtotal: this.state.shippingSubtotal,
                 totalPayment: this.state.totalPayment,
                 timestamp: Date.now(),
+                status: 'PREPARING',
 
             })
             .then(async () => {
