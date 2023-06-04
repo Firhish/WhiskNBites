@@ -117,10 +117,14 @@ class PendingBoxMod extends Component {
 
             <View style={styles.mainContainer}>
 
-                <View style={styles.profileCredBox}>
-                    <Image style={styles.profilePic} source={this.getProfileData(this.props.uid).profilePic ? { uri: this.getProfileData(this.props.uid).profilePic } : { uri: this.state.profilePic }} />
-                    <Text style={styles.username}>{this.getProfileData(this.props.uid).username}</Text>
-                </View>
+                <Pressable onPress={this.props.onPressProfileCred}>
+                    <View style={styles.profileCredBox}>
+                        <Image style={styles.profilePic} source={this.getProfileData(this.props.uid).profilePic ? { uri: this.getProfileData(this.props.uid).profilePic } : { uri: this.state.profilePic }} />
+                        <Text style={styles.username}>{this.getProfileData(this.props.uid).username}</Text>
+                    </View>
+                </Pressable>
+
+                
 
                 <Text style={styles.orderId}>{'Order ID: ' + this.props.orderId}</Text>
 
@@ -137,16 +141,22 @@ class PendingBoxMod extends Component {
 
                 <View style={styles.bottomPart}>
                     <View></View>
-                    <Text style={styles.totalPrice}>{'RM ' + this.props.totalPayment}</Text>
+                    <Text style={styles.totalPrice}>{'RM ' + Number(this.props.totalPayment).toFixed(2)}</Text>
 
                 </View>
                 <Divider />
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 12, alignItems: 'center' }}>
                     <StatusLabel status={this.props.status} />
-                    <Pressable onPress={this.props.onPressBtn}>
-                        <View style={styles.orderReceivedBtnContainer}><Text style={styles.btnText}>Order Shipped</Text></View>
-                    </Pressable>
+
+                    {this.props.status == 'SHIPPED'||this.props.status=='COMPLETED' ? null :
+
+                        <Pressable onPress={this.props.onPressBtn}>
+                            <View style={styles.orderReceivedBtnContainer}><Text style={styles.btnText}>Order Shipped</Text></View>
+                        </Pressable>
+
+                    }
+
                 </View>
 
 

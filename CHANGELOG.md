@@ -38,6 +38,9 @@
 - Add View Order Details UI and connection
 - Add Order cust (Completed) UI and connection
 - Add Order Mod (Pending) UI and connection
+- Add Order Mod (Completed) UI and connection 
+- Add Postage region in checkout page
+
 
 ## Fixed
 - Fixed UI Add New Product form

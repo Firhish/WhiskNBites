@@ -82,7 +82,7 @@ class ToReceiveBoxCust extends Component {
 
                 <View style={styles.bottomPart}>
                     <View></View>
-                    <Text style={styles.totalPrice}>{'RM ' + this.props.totalPayment}</Text>
+                    <Text style={styles.totalPrice}>{'RM ' + Number(this.props.totalPayment).toFixed(2)}</Text>
 
                 </View>
                 <Divider />
