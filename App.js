@@ -27,6 +27,7 @@ import TabsOrderMod from "./pages/moderator/TabsOrderMod";
 import PendingOrder from "./pages/moderator/PendingOrder";
 import CompletedOrderMod from "./pages/moderator/CompletedOrderMod";
 import AnalyticOrder from "./pages/moderator/AnalyticOrder";
+import ViewOrderDetailMod from "./pages/moderator/ViewOrderDetailMod";
 
 
 const Stack = createNativeStackNavigator();
@@ -60,6 +61,7 @@ class App extends Component {
         <Stack.Screen name='PendingOrder' component={PendingOrder} options={{headerShown:false}}/>
         <Stack.Screen name='CompletedOrderMod' component={CompletedOrderMod} options={{headerShown:false}}/>
         <Stack.Screen name='AnalyticOrder' component={AnalyticOrder} options={{headerShown:false}}/>
+        <Stack.Screen name='ViewOrderDetailMod' component={ViewOrderDetailMod} options={{headerShown:false}}/>
         
         </Stack.Navigator>
 

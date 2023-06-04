@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
 
     statusText: {
         color: 'white',
-        fontSize: 12
+        fontSize: 14,
+        fontWeight:'500',
     }
 })
 

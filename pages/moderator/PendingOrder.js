@@ -48,7 +48,7 @@ class PendingOrder extends Component {
 
     viewOrderDetail = (orderId) => {
 
-        this.props.navigation.navigate('ViewOrderDetailCust', { orderId: orderId })
+        this.props.navigation.navigate('ViewOrderDetailMod', { orderId: orderId })
 
     }
 
@@ -79,6 +79,7 @@ class PendingOrder extends Component {
                                 totalPayment={order.totalPayment}
                                 cart={order.cart}
                                 status={order.status}
+                                onPressProfileCred={() => this.props.navigation.navigate('ViewProfileMod', { uid: order.uid })}
                                 onPressBtn={() => order.status == 'SHIPPED' ? null : this.shipped(order.orderId)}
                                 uid={order.uid}
                             />

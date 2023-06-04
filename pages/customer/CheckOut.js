@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { View, Text, ScrollView, TextInput, StyleSheet, Dimensions } from "react-native";
+import { View, Text, ScrollView, TextInput, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 import TransparentHeader from "../../components/TransparentHeader";
 import BigYellowButton from "../../components/BigYellowButton";
 import ProductBox from "../../components/Catalog/ProductBox";
@@ -19,9 +19,10 @@ class CheckOut extends Component {
         cartArr: [],
         testTemp: [],
         merchandiseSubtotal: 0,
-        shippingSubtotal: 4.82,
+        shippingSubtotal: 0,
         totalPayment: 0,
-        userBranchId: ''
+        userBranchId: '',
+        selectedOption: null,
 
     };
 
@@ -80,6 +81,10 @@ class CheckOut extends Component {
 
     }
 
+    setSelectedOption = (selectedOption) => {
+        this.setState({ selectedOption });
+    };
+
     getData = () => {
 
         database()
@@ -125,7 +130,6 @@ class CheckOut extends Component {
                     }).then(() => {
 
                         this.getMerchandiseSubtotal()
-                        this.getTotalPayment()
 
                     })
 
@@ -192,9 +196,7 @@ class CheckOut extends Component {
 
         sum = parseFloat(merchandiseSubtotal) + parseFloat(shippingSubtotal)
 
-        this.setTotalPayment(sum)
-
-
+        return sum
 
     }
 
@@ -212,7 +214,7 @@ class CheckOut extends Component {
                 recepientPhone: this.state.recepientPhone,
                 merchandiseSubtotal: this.state.merchandiseSubtotal,
                 shippingSubtotal: this.state.shippingSubtotal,
-                totalPayment: this.state.totalPayment,
+                totalPayment: this.getTotalPayment(),
                 timestamp: Date.now(),
                 status: 'PREPARING',
 
@@ -244,7 +246,7 @@ class CheckOut extends Component {
                     <ScrollView>
                         <View style={styles.billingDetailsBox}>
 
-                            <Text style={styles.title}>Billing Details</Text>
+                            <Text style={styles.title}>Postage Details</Text>
 
                             <TextInput
                                 placeholder="Billing Name "
@@ -263,10 +265,40 @@ class CheckOut extends Component {
                                 placeholder="Billing Address "
                                 value={this.state.billingAddress}
                                 onChangeText={this.setBillingAddress}
-                                style={styles.inputAddress}
+                                style={[styles.inputAddress, { marginBottom: 12 }]}
                                 multiline={true}
                                 textAlignVertical="top"
                             />
+
+                            <Text style={{ fontSize: 15, marginBottom: 12 }}>Select region: </Text>
+
+
+
+                            <View style={styles.container}>
+                                <TouchableOpacity
+                                    style={[styles.optionButton, this.state.selectedOption === 'option1' && styles.selectedOption]}
+                                    onPress={() => {
+
+                                        this.setSelectedOption('option1')
+                                        this.setShippingSubtotal(5)
+
+                                    }}
+                                >
+                                    <Text style={[styles.optionText, this.state.selectedOption === 'option1' && styles.selectedOptionText]}>Peninsular Malaysia</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={[styles.optionButton, this.state.selectedOption === 'option2' && styles.selectedOption]}
+                                    onPress={() => {
+
+                                        this.setSelectedOption('option2')
+                                        this.setShippingSubtotal(12)
+
+                                    }}
+                                >
+                                    <Text style={[styles.optionText, this.state.selectedOption === 'option2' && styles.selectedOptionText]}>Sabah & Sarawak</Text>
+                                </TouchableOpacity>
+                                {/* <Text>Selected Option: {this.state.selectedOption}</Text> */}
+                            </View>
 
                         </View>
 
@@ -297,14 +329,14 @@ class CheckOut extends Component {
                             </View>
                             <View style={[styles.space, styles.totalPaymentBox]}>
                                 <Text style={{ fontSize: 18, fontWeight: '700', color: 'black' }}>Total Payment</Text>
-                                <Text style={{ fontSize: 18, color: '#DB9B06' }}>{'RM ' + Number(this.state.totalPayment).toFixed(2)}</Text>
+                                <Text style={{ fontSize: 18, color: '#DB9B06' }}>{'RM ' + Number(this.getTotalPayment()).toFixed(2)}</Text>
                             </View>
                         </View>
 
                     </ScrollView>
                     <BigYellowButton clickHandle={() => {
 
-                        this.state.billingName && this.state.billingAddress && this.state.recepientPhone ?
+                        this.state.billingName && this.state.billingAddress && this.state.recepientPhone && this.state.selectedOption ?
                             this.placeOrder() : alert('All field must be filled')
 
                     }} btnText={'Place Order'} />
@@ -363,6 +395,36 @@ const styles = StyleSheet.create({
 
     totalPaymentBox: {
         marginTop: 10,
+    },
+
+    container: {
+        flexDirection: 'row',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+    },
+    optionButton: {
+        width: '48%',
+        height: 40,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: 'grey',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 10,
+    },
+    selectedOption: {
+        borderColor: '#DB9B06',
+        borderWidth: 2,
+    },
+    optionText: {
+        fontSize: 15,
+
+    },
+    selectedOptionText: {
+        fontSize: 15,
+        color: '#DB9B06',
+        fontWeight: '600',
     }
 
 });
