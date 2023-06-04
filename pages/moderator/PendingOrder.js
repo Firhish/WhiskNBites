@@ -1,11 +1,9 @@
 import { Component } from "react";
-import { Pressable, SafeAreaView, ScrollView, Text } from "react-native";
-import ToReceiveBoxCust from "../../components/Order/ToReceiveBoxCust";
-import auth from '@react-native-firebase/auth';
+import { Text, View, Pressable, SafeAreaView, ScrollView } from "react-native";
 import database from '@react-native-firebase/database';
+import PendingBoxMod from "../../components/Order/PendingBoxMod";
 
-class ToReceiveOrder extends Component {
-
+class PendingOrder extends Component {
     state = {
 
         orderArr: [],
@@ -28,15 +26,9 @@ class ToReceiveOrder extends Component {
                     let data = [];
                     snapshot.forEach((child) => {
 
-                        if (child.val().uid == auth().currentUser.uid) {
-                            temp = child.val()
-                            temp.orderId = child.key
-                            data.push(temp)
-                        }
-
-                        else {
-                            return null
-                        }
+                        temp = child.val()
+                        temp.orderId = child.key
+                        data.push(temp)
 
                     })
 
@@ -60,42 +52,16 @@ class ToReceiveOrder extends Component {
 
     }
 
-    moveToArchive = (orderId) => {
-
-        let deleted
-
-        console.log('Move to archive: ' + orderId)
+    shipped = (orderId) => {
 
         database()
             .ref('/Orders/' + orderId)
-            .once('value', (snapshot) => {
-                if (snapshot.exists()) {
-
-                    deleted = snapshot.val()
-                    deleted.status = 'COMPLETED'
-
-                }
-
-            }).then(() => {
-
-                database()
-                    .ref('/Archived_Orders/' + orderId)
-                    .update(deleted)
-                    .then(async () => {
-
-                        database()
-                            .ref('/Orders/' + orderId)
-                            .remove()
-                            .then(() => {
-                                alert('Order received successfully')
-                            })
-
-                    })
-
-
+            .update({
+                status: 'SHIPPED'
+            })
+            .then(() => {
+                alert('Order status updated successfully')
             });
-
-
 
     }
 
@@ -108,17 +74,15 @@ class ToReceiveOrder extends Component {
                     {this.state.orderArr.length != 0 ? this.state.orderArr.map((order, index) => (
 
                         <Pressable key={index} onPress={() => this.viewOrderDetail(order.orderId)}>
-                            <ToReceiveBoxCust
+                            <PendingBoxMod
                                 orderId={order.orderId}
                                 totalPayment={order.totalPayment}
                                 cart={order.cart}
                                 status={order.status}
-                                onPressBtn={() => this.moveToArchive(order.orderId)}
+                                onPressBtn={() => order.status == 'SHIPPED' ? null : this.shipped(order.orderId)}
+                                uid={order.uid}
                             />
                         </Pressable>
-
-
-
                     )).reverse() : <Text style={{ textAlign: 'center', marginTop: '70%', fontSize: 16 }}>No order placed yet</Text>}
                 </ScrollView>
 
@@ -129,4 +93,4 @@ class ToReceiveOrder extends Component {
     }
 }
 
-export default ToReceiveOrder
+export default PendingOrder

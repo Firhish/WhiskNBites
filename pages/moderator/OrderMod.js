@@ -1,15 +1,20 @@
 import { Component } from "react";
-import { SafeAreaView, Text } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
+import TabHeader from "../../components/TabHeader";
+// import TabsOrderCust from "./TabsOrderCust";
+import TabsOrderMod from "./TabsOrderMod";
 
-class OrderMod extends Component{
+class OrderMod extends Component {
 
-    render(){
+    render() {
 
-        return(
+        return (
 
-            <SafeAreaView>
-                <Text>OrderMod</Text>
-            </SafeAreaView>
+            <>
+                <TabHeader title='Order' iconClickHandle={()=>{}} />
+                <TabsOrderMod />
+            </>
+
         )
     }
 }
