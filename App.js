@@ -23,6 +23,10 @@ import TabsOrderCust from "./pages/customer/TabsOrderCust";
 import ToReceiveOrder from "./pages/customer/ToReceiveOrder";
 import CompletedOrder from "./pages/customer/CompletedOrder";
 import ViewOrderDetailCust from "./pages/customer/ViewOrderDetailCust";
+import TabsOrderMod from "./pages/moderator/TabsOrderMod";
+import PendingOrder from "./pages/moderator/PendingOrder";
+import CompletedOrderMod from "./pages/moderator/CompletedOrderMod";
+import AnalyticOrder from "./pages/moderator/AnalyticOrder";
 
 
 const Stack = createNativeStackNavigator();
@@ -52,6 +56,10 @@ class App extends Component {
         <Stack.Screen name='ToReceiveOrder' component={ToReceiveOrder} options={{headerShown:false}}/>
         <Stack.Screen name='CompletedOrder' component={CompletedOrder} options={{headerShown:false}}/>
         <Stack.Screen name='ViewOrderDetailCust' component={ViewOrderDetailCust} options={{headerShown:false}}/>
+        <Stack.Screen name='TabsOrderMod' component={TabsOrderMod} options={{headerShown:false}}/>
+        <Stack.Screen name='PendingOrder' component={PendingOrder} options={{headerShown:false}}/>
+        <Stack.Screen name='CompletedOrderMod' component={CompletedOrderMod} options={{headerShown:false}}/>
+        <Stack.Screen name='AnalyticOrder' component={AnalyticOrder} options={{headerShown:false}}/>
         
         </Stack.Navigator>
 

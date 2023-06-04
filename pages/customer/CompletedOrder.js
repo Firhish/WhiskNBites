@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { Pressable, SafeAreaView, ScrollView, Text } from "react-native";
-import ToReceiveBoxCust from "../../components/Order/ToReceiveBoxCust";
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import CompletedOrderBoxCust from "../../components/Order/CompletedOrderBoxCust";
@@ -79,9 +78,7 @@ class CompletedOrder extends Component {
                             />
                         </Pressable>
 
-
-
-                    )) : <Text style={{ textAlign: 'center', marginTop: '70%', fontSize: 16 }}>No order placed yet</Text>}
+                    )).reverse() : <Text style={{ textAlign: 'center', marginTop: '70%', fontSize: 16 }}>No order placed yet</Text>}
                 </ScrollView>
 
 

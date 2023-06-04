@@ -13,7 +13,7 @@ class StatusLabel extends Component {
 
         else if (status == 'SHIPPED') {
 
-            return 'orange'
+            return 'blue'
 
         }
 

@@ -37,6 +37,7 @@
 - Add Order cust (order received) UI and connection
 - Add View Order Details UI and connection
 - Add Order cust (Completed) UI and connection
+- Add Order Mod (Pending) UI and connection
 
 ## Fixed
 - Fixed UI Add New Product form
