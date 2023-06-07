@@ -28,6 +28,8 @@ import PendingOrder from "./pages/moderator/PendingOrder";
 import CompletedOrderMod from "./pages/moderator/CompletedOrderMod";
 import AnalyticOrder from "./pages/moderator/AnalyticOrder";
 import ViewOrderDetailMod from "./pages/moderator/ViewOrderDetailMod";
+import AddPromoForm from "./pages/moderator/AddPromoForm";
+import EditPromoForm from "./pages/moderator/EditPromoForm";
 
 
 const Stack = createNativeStackNavigator();
@@ -62,7 +64,8 @@ class App extends Component {
         <Stack.Screen name='CompletedOrderMod' component={CompletedOrderMod} options={{headerShown:false}}/>
         <Stack.Screen name='AnalyticOrder' component={AnalyticOrder} options={{headerShown:false}}/>
         <Stack.Screen name='ViewOrderDetailMod' component={ViewOrderDetailMod} options={{headerShown:false}}/>
-        
+        <Stack.Screen name='AddPromoForm' component={AddPromoForm} options={{headerShown:false}}/>
+        <Stack.Screen name='EditPromoForm' component={EditPromoForm} options={{headerShown:false}}/>
         </Stack.Navigator>
 
       </NavigationContainer>
