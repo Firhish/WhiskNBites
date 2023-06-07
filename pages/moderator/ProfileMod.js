@@ -55,6 +55,7 @@ class ProfileMod extends Component {
                 <TabHeader title='Profile' icon='log-out-outline' iconClickHandle={() => { this.setConfirmModalVisible(!this.state.confirmModalVisible) }} />
                 <View style={{ flex: 1, padding: 20 }}>
                     <ScrollView>
+                        <Text style={styles.dealText}>Registered Customer</Text>
                         {this.state.usersArr.map((user, index) => (
 
                             <Pressable key={index} onPress={() => this.props.navigation.navigate('ViewProfileMod', { uid: user.uid })}>
@@ -88,3 +89,56 @@ class ProfileMod extends Component {
 }
 
 export default ProfileMod
+
+const styles = StyleSheet.create({
+
+    welcomeText: {
+
+        fontSize: 24,
+        margin: 12,
+        color: '#DB9B06',
+
+    },
+
+    dealText: {
+
+        fontSize: 22,
+        fontWeight: 'bold',
+        marginBottom: 25,
+
+    },
+
+    promoImageText: {
+
+        fontSize: 18,
+
+    },
+
+    promoName: {
+
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginTop: 8,
+
+    },
+
+    promoValidity: {
+
+        marginTop: 4,
+
+
+    },
+
+    promotionBox: {
+
+        width: 300,
+        height: 200,
+        borderRadius: 8,
+        marginRight: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'lightgrey',
+
+    }
+
+});

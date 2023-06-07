@@ -40,7 +40,7 @@
 - Add Order Mod (Pending) UI and connection
 - Add Order Mod (Completed) UI and connection 
 - Add Postage region in checkout page
-
+- Promotion Cust/Mod UI and connection
 
 ## Fixed
 - Fixed UI Add New Product form
