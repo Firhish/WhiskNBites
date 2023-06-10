@@ -53,9 +53,6 @@ class PromotionCust extends Component {
         else {
 
         }
-
-        // console.log(this.state.currUser)
-
       });
 
     database()
@@ -98,7 +95,7 @@ class PromotionCust extends Component {
 
       <View style={{ flex: 1, }}>
 
-        <TabHeader title='Promotion' icon='add' iconClickHandle={() => { }} />
+        <TabHeader title='Promotion' iconClickHandle={() => { }} />
         <View>
           <Text style={styles.welcomeText}>{'Welcome ' + this.state.currUser.username}</Text>
           <Text style={styles.dealText}>Deals for you</Text>
@@ -111,6 +108,7 @@ class PromotionCust extends Component {
                 discount={promo.discount}
                 name={promo.name}
                 validity={promo.validity}
+                code={promo.code}
               />
 
 
@@ -150,6 +148,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 12,
     fontWeight: 'bold',
+    marginTop: '25%',
+
 
   },
 

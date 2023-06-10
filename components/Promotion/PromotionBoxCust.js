@@ -10,7 +10,7 @@ class PromotionBoxCust extends Component {
 
       <View>
         <View style={[styles.promotionBox]}>
-          <Text style={styles.promoImageText}>{(this.props.discount * 100) + '% off'}</Text>
+          <Text style={styles.promoImageText}>{this.props.code}</Text>
         </View>
         <Text style={styles.promoName}>{this.props.name}</Text>
         <Text style={styles.promoValidity}>{'Valid until ' + moment(this.props.validity).format('LL')}</Text>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 
   promoName: {
 
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
     marginTop: 8,
 
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'lightgrey',
+    backgroundColor: 'white',
 
   }
 

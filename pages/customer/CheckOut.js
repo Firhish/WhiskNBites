@@ -1,10 +1,12 @@
 import { Component } from "react";
-import { View, Text, ScrollView, TextInput, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TextInput, StyleSheet, Dimensions, TouchableOpacity, Pressable } from "react-native";
 import TransparentHeader from "../../components/TransparentHeader";
 import BigYellowButton from "../../components/BigYellowButton";
 import ProductBox from "../../components/Catalog/ProductBox";
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import VoucherModal from "../../components/Promotion/VoucherModal";
 
 const { width } = Dimensions.get('window');
 
@@ -23,6 +25,9 @@ class CheckOut extends Component {
         totalPayment: 0,
         userBranchId: '',
         selectedOption: null,
+        discount: 0,
+        promotionArr: [],
+        voucherModalVisible: false,
 
     };
 
@@ -31,6 +36,12 @@ class CheckOut extends Component {
         this.setState({ userBranchId })
 
     ]
+
+    setVoucherModalVisible = (voucherModalVisible) => {
+
+        this.setState({ voucherModalVisible })
+
+    }
 
 
     setBillingAddress = (billingAddress) => {
@@ -63,6 +74,12 @@ class CheckOut extends Component {
 
     }
 
+    setPromotionArr = (promotionArr) => {
+
+        this.setState({ promotionArr })
+
+    }
+
     setMerchandiseSubtotal = (merchandiseSubtotal) => {
 
         this.setState({ merchandiseSubtotal })
@@ -85,7 +102,33 @@ class CheckOut extends Component {
         this.setState({ selectedOption });
     };
 
+    setDiscount = (discount) => {
+        this.setState({ discount })
+    };
+
     getData = () => {
+
+
+        database()
+            .ref('/Promotions')
+            .once('value', (snapshot) => {
+                if (snapshot.exists()) {
+
+                    let data = [];
+                    snapshot.forEach((child) => {
+                        temp = child.val()
+                        temp.id = child.key
+                        data.push(temp)
+                        this.setPromotionArr(data)
+                    })
+
+                }
+                else {
+                    return null
+                }
+            })
+
+
 
         database()
             .ref('/Products')
@@ -166,6 +209,8 @@ class CheckOut extends Component {
         this.getData()
     }
 
+
+
     getMerchandiseSubtotal = () => {
 
 
@@ -188,15 +233,67 @@ class CheckOut extends Component {
 
     }
 
+    getDiscount = () => {
+
+        const { merchandiseSubtotal, discount, promotionArr } = this.state
+
+
+
+
+        let sum = 0
+
+        sum = discount * merchandiseSubtotal
+
+
+
+        return sum
+
+    }
+
+
+
     getTotalPayment = () => {
 
         let sum = 0
 
         const { merchandiseSubtotal, shippingSubtotal } = this.state
 
-        sum = parseFloat(merchandiseSubtotal) + parseFloat(shippingSubtotal)
+        sum = (parseFloat(merchandiseSubtotal) - this.getDiscount()) + parseFloat(shippingSubtotal)
+
+
 
         return sum
+
+    }
+
+    getCodeResult = (code) => {
+
+        const { promotionArr } = this.state
+        let isInvalidCode = true
+
+        for (i = 0; i < promotionArr.length; i++) {
+
+            if (promotionArr[i].code == code) {
+
+                this.setDiscount(promotionArr[i].discount)
+                isInvalidCode = false
+
+            }
+        }
+
+        if (isInvalidCode) {
+
+            alert('Please enter valid promo code')
+
+        }
+        else {
+
+            alert('Voucher applied successfully')
+
+        }
+
+
+
 
     }
 
@@ -214,9 +311,11 @@ class CheckOut extends Component {
                 recepientPhone: this.state.recepientPhone,
                 merchandiseSubtotal: this.state.merchandiseSubtotal,
                 shippingSubtotal: this.state.shippingSubtotal,
+                discountAmount: this.getDiscount().toFixed(2),
                 totalPayment: this.getTotalPayment(),
                 timestamp: Date.now(),
                 status: 'PREPARING',
+                discount: this.state.discount,
 
             })
             .then(async () => {
@@ -324,9 +423,22 @@ class CheckOut extends Component {
                                 <Text>{'RM ' + Number(this.state.merchandiseSubtotal).toFixed(2)}</Text>
                             </View>
                             <View style={styles.space}>
+                                <Text>{'Discount (' + (this.state.discount * 100) + '%)'}</Text>
+                                <Text>{'-- RM ' + Number(this.getDiscount()).toFixed(2)}</Text>
+                            </View>
+                            <View style={styles.space}>
                                 <Text>Shipping Subtotal</Text>
                                 <Text>{'RM ' + Number(this.state.shippingSubtotal).toFixed(2)}</Text>
                             </View>
+
+                            <Pressable onPress={() => { this.setVoucherModalVisible(!this.state.voucherModalVisible) }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 8 }}>
+                                    <Ionicons name={'receipt-outline'} size={22} color={'#DB9B06'} />
+                                    <Text style={{ fontSize: 16, fontWeight: '700', color: '#DB9B06', marginLeft: 8 }}>Apply a voucher</Text>
+                                </View>
+                            </Pressable>
+
+
                             <View style={[styles.space, styles.totalPaymentBox]}>
                                 <Text style={{ fontSize: 18, fontWeight: '700', color: 'black' }}>Total Payment</Text>
                                 <Text style={{ fontSize: 18, color: '#DB9B06' }}>{'RM ' + Number(this.getTotalPayment()).toFixed(2)}</Text>
@@ -341,6 +453,14 @@ class CheckOut extends Component {
 
                     }} btnText={'Place Order'} />
                 </View>
+                <VoucherModal
+                    visible={this.state.voucherModalVisible}
+                    onConfirm={(code) => {
+                        this.getCodeResult(code)
+                        this.setVoucherModalVisible(!this.state.voucherModalVisible)
+                    }}
+                    onCancel={() => this.setVoucherModalVisible(!this.state.voucherModalVisible)}
+                />
             </View>
 
 
