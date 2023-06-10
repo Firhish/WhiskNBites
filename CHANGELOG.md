@@ -40,7 +40,8 @@
 - Add Order Mod (Pending) UI and connection
 - Add Order Mod (Completed) UI and connection 
 - Add Postage region in checkout page
-- Promotion Cust/Mod UI and connection
+- Add Promotion Cust/Mod UI and connection
+- Add voucher application feature
 
 ## Fixed
 - Fixed UI Add New Product form
@@ -48,3 +49,4 @@
 - Fixed UI for option/confirm modal
 - Fixed code readability for option/confirm modal 
 - Fixed checkout logic
+- Fixed Promotion Cust UI

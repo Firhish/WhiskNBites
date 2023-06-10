@@ -210,6 +210,10 @@ class ViewOrderDetailMod extends Component {
                             <Text>{'RM ' + Number(this.state.orderData.merchandiseSubtotal).toFixed(2)}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text>{'Discount (' + (this.state.orderData.discount * 100) + '%)'}</Text>
+                            <Text>{'-- RM ' + Number(this.state.orderData.discountAmount).toFixed(2)}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text>Shipping Fee</Text>
                             <Text>{'RM ' + Number(this.state.orderData.shippingSubtotal).toFixed(2)}</Text>
                         </View>
