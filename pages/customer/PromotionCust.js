@@ -62,10 +62,13 @@ class PromotionCust extends Component {
 
           snapshot.forEach((child) => {
 
-            temp = child.val()
-            temp.id = child.key
-            data.push(temp)
+            if (Date.now() < child.val().validity) {
 
+              temp = child.val()
+              temp.id = child.key
+              data.push(temp)
+
+            }
           })
 
 
@@ -148,9 +151,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 12,
     fontWeight: 'bold',
-    marginTop: '25%',
-
-
   },
 
   promoImageText: {

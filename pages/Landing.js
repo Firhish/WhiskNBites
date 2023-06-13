@@ -8,19 +8,20 @@ class Landing extends Component {
 
         return (
             <View style={styles.container}>
-                <ImageBackground source={require('../assets/landingBackground.png')} style={styles.bgImage} resizeMode='cover'>
+                <ImageBackground source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/landingBackground.png?alt=media&token=07f62c41-0ff8-40a5-8223-8b988fcf31e5' }} style={styles.bgImage} resizeMode='cover'>
                     <View style={styles.overlay}>
-                        <Image source={require('../assets/wnbLogo.png')} style={styles.image} />
+                        <Image source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/wnbLogo.png?alt=media&token=266f5dcb-ddd3-453f-8674-5783e6a40539' }} style={styles.image} />
                         <View style={styles.signInAndUpContainer}>
                             <Pressable onPress={() => {
                                 this.props.navigation.navigate('SignUp');
                             }}><Text style={styles.signUp}>SIGN UP</Text></Pressable>
                             <Pressable onPress={() => {
-                                this.props.navigation.navigate('SignIn');}}>
-                                <View style={{flexDirection:"row"}}>
-                                <Text style={{fontWeight:'600'}}>Already have an account?</Text>
-                                <Text style={{fontWeight:'800'}}> Sign In</Text>
-                                </View>  
+                                this.props.navigation.navigate('SignIn');
+                            }}>
+                                <View style={{ flexDirection: "row" }}>
+                                    <Text style={{ fontWeight: '600' }}>Already have an account?</Text>
+                                    <Text style={{ fontWeight: '800' }}> Sign In</Text>
+                                </View>
                             </Pressable>
                         </View>
                     </View>
@@ -37,21 +38,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#DB9B06',
     },
-
-    // signUp: {
-    //     fontWeight: '700',
-    //     color: 'white',
-    //     fontSize: 18,
-    //     paddingTop: 15,
-    //     paddingBottom: 15,
-    //     paddingLeft: 95,
-    //     paddingRight: 95,
-    //     borderWidth: 3,
-    //     borderRadius: 50,
-    //     borderColor: 'white',
-    //     marginBottom: 30,
-    //     letterSpacing: 2,
-    // },
 
     signInAndUpContainer: {
         alignItems: 'center'
