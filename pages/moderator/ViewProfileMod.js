@@ -68,7 +68,7 @@ class ViewProfileMod extends Component {
         return (
 
             <SafeAreaView style={{ flex: 1 }}>
-                <TransparentHeader goBack={this.props.navigation.goBack} />
+                <TransparentHeader title={'Customer Profile'} goBack={this.props.navigation.goBack} />
                 <View style={{ flex: 1 }}>
                     <View>
                         <Image source={{ uri: this.state.coverPic }} style={styles.coverPic} />

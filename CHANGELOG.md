@@ -42,6 +42,7 @@
 - Add Postage region in checkout page
 - Add Promotion Cust/Mod UI and connection
 - Add voucher application feature
+- Add Analytic feature (unit sold & revenue & graph)
 
 ## Fixed
 - Fixed UI Add New Product form

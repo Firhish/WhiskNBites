@@ -85,7 +85,7 @@ class ProfileCust extends Component {
 
             <SafeAreaView style={{ flex: 1 }}>
 
-                <TabHeader title='Profile' icon='menu' iconClickHandle={() => this.setModalVisible(!this.state.modalVisible)} />
+                <TabHeader title='My Profile' icon='menu' iconClickHandle={() => this.setModalVisible(!this.state.modalVisible)} />
                 <View style={{ flex: 1 }}>
                     <View>
                         <Image source={{ uri: this.state.coverPic }} style={styles.coverPic} />

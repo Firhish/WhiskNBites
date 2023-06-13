@@ -14,7 +14,12 @@ class PromotionBoxMod extends Component {
         <Text style={styles.promoImageText}>{(this.props.discount * 100) + '%'}</Text>
         <View>
           <Text style={styles.promoName}>{this.props.name}</Text>
-          <Text style={styles.promoValidity}>{'Valid until ' + moment(this.props.validity).format('LL')}</Text>
+          {Date.now() < this.props.validity ?
+
+            <Text style={styles.promoValidity}>{'Valid until ' + moment(this.props.validity).format('LL')}</Text> :
+            <Text style={[styles.promoValidity, { color: 'red' }]}>{'EXPIRED'}</Text>
+          }
+
         </View>
         <Text style={styles.promoCode}>{this.props.code}</Text>
 
