@@ -31,7 +31,22 @@ class ProfileMod extends Component {
         database()
             .ref('/Users')
             .on('value', (snapshot) => {
-                this.setUsersArr(Object.values(snapshot.val()))
+                if (snapshot.exists()) {
+                    let data = [];
+                    
+                    snapshot.forEach((child) => {
+                        if(child.val().user_type=='customer'){
+                        temp = child.val()
+                        data.push(temp)
+                        }
+                    })
+                    this.setUsersArr(data)
+                }
+                else {
+                    this.setUsersArr([])
+                }
+
+                console.log(this.state.usersArr)
             });
 
 
@@ -68,7 +83,7 @@ class ProfileMod extends Component {
 
 
 
-                        ))}
+                        )).reverse()}
 
                     </ScrollView>
 

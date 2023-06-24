@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 import { Component } from 'react';
 
 class SignIn extends Component {
@@ -9,23 +10,50 @@ class SignIn extends Component {
         pwdVal: '',
         isFocusedEmail: false,
         isFocusedPwd: false,
+        usersArr: [],
     }
 
+    setUsersArr = (usersArr) => {
+        this.setState({ usersArr })
+    }
+
+    componentDidMount() {
+        this.getData()
+    }
+
+    getData = () => {
+
+        database()
+            .ref('/Users')
+            .once('value', (snapshot) => {
+                this.setUsersArr(Object.values(snapshot.val()))
+            })
+            // .then(()=>console.log(this.state.usersArr));
+        
+    }
+
+
     onClickHandle = () => {
+
+        const {usersArr} = this.state 
 
         auth()
             .signInWithEmailAndPassword(this.state.emailVal, this.state.pwdVal)
             .then(() => {
+                for(i=0;i<usersArr.length;i++){
 
-                if(auth().currentUser.uid=="79u2YqJWtaZ4ZfjP8GuBVLK7QP52"){
-                    console.log("Moderator signed in!")
-                    this.props.navigation.navigate('TabsMod');
-                }
-                else{
-                    console.log('User signed in!');
-                    this.props.navigation.navigate('TabsCust');
-                }
-                
+                    if(usersArr[i].uid==auth().currentUser.uid){
+
+                        if (usersArr[i].user_type == "moderator") {
+                            console.log("Moderator signed in!")
+                            this.props.navigation.navigate('TabsMod');
+                        }
+                        else {
+                            console.log('User signed in!');
+                            this.props.navigation.navigate('TabsCust');
+                        }
+                    }
+                } 
             })
             .catch(error => {
                 if (error.code === 'auth/wrong-password') {
@@ -42,9 +70,6 @@ class SignIn extends Component {
                 }
                 console.error(error);
             });
-
-
-
     }
 
     handleFocusEmail = () => this.setState({ isFocusedEmail: true })

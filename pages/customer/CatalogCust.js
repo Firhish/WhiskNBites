@@ -72,7 +72,7 @@ class CatalogCust extends Component {
   render() {
     return (
 
-      <SafeAreaView>
+      <View style={{ flex: 1, }}>
 
         <TabHeader title='Catalog' icon='cart' iconClickHandle={this.addToCart} />
 
@@ -85,7 +85,7 @@ class CatalogCust extends Component {
 
         </ScrollView>
 
-      </SafeAreaView>
+      </View>
 
     )
 
