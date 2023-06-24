@@ -43,6 +43,7 @@
 - Add Promotion Cust/Mod UI and connection
 - Add voucher application feature
 - Add Analytic feature (unit sold & revenue & graph)
+- Add Access Control
 
 ## Fixed
 - Fixed UI Add New Product form
@@ -51,3 +52,4 @@
 - Fixed code readability for option/confirm modal 
 - Fixed checkout logic
 - Fixed Promotion Cust UI
+- Fix and add exception

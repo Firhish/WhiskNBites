@@ -66,7 +66,7 @@ class EditProductForm extends Component {
             .update({
                 product_name: this.state.productName,
                 product_price: this.state.productPrice,
-                product_image: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/almondLondon.jpg?alt=media&token=4d342545-4f84-435b-91b3-461ce530b15f',
+                // product_image: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/almondLondon.jpg?alt=media&token=4d342545-4f84-435b-91b3-461ce530b15f',
                 product_description: this.state.productDescription,
             })
             .then(() => {

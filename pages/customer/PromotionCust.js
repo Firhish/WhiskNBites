@@ -76,6 +76,7 @@ class PromotionCust extends Component {
         }
         else {
           return null
+          // console.log('kosong mat')
         }
 
         this.setPromoArr(data)
@@ -95,35 +96,27 @@ class PromotionCust extends Component {
   render() {
     return (
 
-
       <View style={{ flex: 1, }}>
-
         <TabHeader title='Promotion' iconClickHandle={() => { }} />
         <View>
           <Text style={styles.welcomeText}>{'Welcome ' + this.state.currUser.username}</Text>
-          <Text style={styles.dealText}>Deals for you</Text>
-          <ScrollView horizontal={true} style={{ paddingLeft: 18 }} showsHorizontalScrollIndicator={false}>
+          {this.state.promoArr.length != 0 ?
+            <View>
+              <Text style={styles.dealText}>Deals for you</Text>
+              <ScrollView horizontal={true} style={{ paddingLeft: 18 }} showsHorizontalScrollIndicator={false}>
+                {this.state.promoArr.map((promo, index) => (
 
-            {this.state.promoArr.map((promo, index) => (
-
-              <PromotionBoxCust
-                key={index}
-                discount={promo.discount}
-                name={promo.name}
-                validity={promo.validity}
-                code={promo.code}
-              />
-
-
-
-
-            )).reverse()}
-
-
-
-
-          </ScrollView>
-
+                  <PromotionBoxCust
+                    key={index}
+                    discount={promo.discount}
+                    name={promo.name}
+                    validity={promo.validity}
+                    code={promo.code}
+                  />
+                )).reverse()}
+              </ScrollView>
+            </View>
+            : <Text style={{ marginTop: '65%', textAlign: 'center', fontSize: 16 }}>No active promotion at the moment</Text>}
 
         </View>
 
