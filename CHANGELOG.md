@@ -44,6 +44,8 @@
 - Add voucher application feature
 - Add Analytic feature (unit sold & revenue & graph)
 - Add Access Control
+- Add SignUp email validation
+- Add analytic feature
 
 ## Fixed
 - Fixed UI Add New Product form

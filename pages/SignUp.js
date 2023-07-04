@@ -38,6 +38,7 @@ class SignUp extends Component {
                         dp_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT23NlA9taxcUhdcm3JbbPqRoNfn5m9gxVjQ&usqp=CAU'
                     })
                     .then(() => {
+                        alert('Signup successfully')
                         this.props.navigation.navigate('TabsCust');
                     })
                 // this.props.navigation.navigate('TabsCust');
@@ -87,6 +88,17 @@ class SignUp extends Component {
         this.setState({ usernameVal: text });
     }
 
+    validateEmail = () => {
+        const { emailVal } = this.state;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(emailVal)) {
+            alert('Please enter a valid email address.');
+        } else {
+            this.onClickHandle()
+            // alert('Email is valid.');
+        }
+    };
+
     render() {
         return (
 
@@ -131,7 +143,28 @@ class SignUp extends Component {
                     />
                     
                 </View>
-                <Pressable onPress={(this.state.emailVal != "" && this.state.pwdVal != "" && this.state.phoneVal != "" && this.state.usernameVal != "") ? this.onClickHandle : () => { alert('All field must be filled') }}><View style={styles.signUpBtn}><Text style={styles.signUpBtnText}>SIGN UP</Text></View></Pressable>
+                <Pressable onPress={
+                    // (this.state.emailVal != ""
+                    //  && this.state.pwdVal != "" 
+                    //  && this.state.phoneVal != "" 
+                    //  && this.state.usernameVal != "") ? this.onClickHandle :
+                    //  () => { alert('All field must be filled') }
+                    () => {
+
+                        if (this.state.emailVal != "" && this.state.pwdVal != "" && this.state.phoneVal != "" && this.state.usernameVal != "") {
+
+                            this.validateEmail(this.state.emailVal)
+
+                        }
+                        else{
+
+                            alert('All field must be filled')
+
+                        }
+                    }
+                }
+                >
+                    <View style={styles.signUpBtn}><Text style={styles.signUpBtnText}>SIGN UP</Text></View></Pressable>
             </View>
 
         )
