@@ -214,7 +214,8 @@ const styles = StyleSheet.create({
 
     prodDescText: {
         marginTop: 20,
-        fontSize: 16,
+        fontSize: 18,
+        color:'#303030',
     },
 
     btnContainer: {
