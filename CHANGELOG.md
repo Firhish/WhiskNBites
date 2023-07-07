@@ -46,6 +46,8 @@
 - Add Access Control
 - Add SignUp email validation
 - Add analytic feature
+- Add stripe
+- Add payment sreen 
 
 ## Fixed
 - Fixed UI Add New Product form
@@ -54,4 +56,5 @@
 - Fixed code readability for option/confirm modal 
 - Fixed checkout logic
 - Fixed Promotion Cust UI
-- Fix and add exception
+- Fixed and add exception
+- Fixed Promo Moderator UI

@@ -7,6 +7,7 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import VoucherModal from "../../components/Promotion/VoucherModal";
+import PaymentScreen from "../PaymentScreen";
 
 const { width } = Dimensions.get('window');
 
@@ -42,7 +43,6 @@ class CheckOut extends Component {
         this.setState({ voucherModalVisible })
 
     }
-
 
     setBillingAddress = (billingAddress) => {
 
@@ -236,16 +236,8 @@ class CheckOut extends Component {
     getDiscount = () => {
 
         const { merchandiseSubtotal, discount, promotionArr } = this.state
-
-
-
-
         let sum = 0
-
         sum = discount * merchandiseSubtotal
-
-
-
         return sum
 
     }
@@ -255,13 +247,8 @@ class CheckOut extends Component {
     getTotalPayment = () => {
 
         let sum = 0
-
         const { merchandiseSubtotal, shippingSubtotal } = this.state
-
         sum = (parseFloat(merchandiseSubtotal) - this.getDiscount()) + parseFloat(shippingSubtotal)
-
-
-
         return sum
 
     }
@@ -324,16 +311,12 @@ class CheckOut extends Component {
                     .ref('/Users/' + this.state.userBranchId + '/cart')
                     .remove()
                     .then(() => {
-                        this.props.navigation.navigate('TabsCust');
-                        alert('Your order has been placed')
+                        this.props.navigation.navigate('PaymentCust');
+
                     })
-
-
             });
 
-
     }
-
 
     render() {
 
@@ -342,7 +325,7 @@ class CheckOut extends Component {
             <View style={{ flex: 1 }}>
                 <TransparentHeader title='Checkout' goBack={this.props.navigation.goBack} />
                 <View style={{ flex: 1, padding: 12 }}>
-                    <ScrollView>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={styles.billingDetailsBox}>
 
                             <Text style={styles.title}>Postage Details</Text>
@@ -444,7 +427,7 @@ class CheckOut extends Component {
                                 <Text style={{ fontSize: 18, color: '#DB9B06' }}>{'RM ' + Number(this.getTotalPayment()).toFixed(2)}</Text>
                             </View>
                         </View>
-
+                        {/* <PaymentScreen /> */}
                     </ScrollView>
                     <BigYellowButton clickHandle={() => {
 
@@ -452,6 +435,7 @@ class CheckOut extends Component {
                             this.placeOrder() : alert('All field must be filled')
 
                     }} btnText={'Place Order'} />
+
                 </View>
                 <VoucherModal
                     visible={this.state.voucherModalVisible}
@@ -462,12 +446,8 @@ class CheckOut extends Component {
                     onCancel={() => this.setVoucherModalVisible(!this.state.voucherModalVisible)}
                 />
             </View>
-
-
         )
-
     }
-
 }
 
 export default CheckOut
@@ -479,7 +459,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 12,
         borderRadius: 3,
-        marginBottom: 12,
+
     },
 
     title: {
