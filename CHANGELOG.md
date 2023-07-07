@@ -58,3 +58,4 @@
 - Fixed Promotion Cust UI
 - Fixed and add exception
 - Fixed Promo Moderator UI
+- Fixed Product Description

@@ -101,6 +101,7 @@ class EditProductForm extends Component {
                             onChangeText={this.handleProductDescriptionChange}
                             value={this.state.productDescription}
                             placeholder='Product Description'
+                            multiline={true}
                         />
                         {this.state.productImage && (
                             <Image style={styles.image} source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/almondLondon.jpg?alt=media&token=4d342545-4f84-435b-91b3-461ce530b15f' }} />
