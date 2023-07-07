@@ -100,7 +100,7 @@ class PromotionMod extends Component {
 
                   <Pressable
                     key={index}
-                    onLongPress={() => {
+                    onPress={() => {
                       this.setModalVisible(!this.state.modalVisible)
                       this.setPromoId(promo.id)
                     }}

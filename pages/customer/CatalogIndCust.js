@@ -157,7 +157,7 @@ class CatalogIndCust extends Component {
                     <View style={styles.textContainer}>
                         <Text style={styles.prodNameText}>{this.state.prodName}</Text>
                         <Text style={styles.prodPriceText}>{'RM ' + Number(this.state.prodPrice).toFixed(2)}</Text>
-                        <ScrollView><Text style={styles.prodDescText}>{this.state.prodDesc}</Text></ScrollView>
+                        <Text style={styles.prodDescText}>{this.state.prodDesc}</Text>
 
                     </View>
                     <View style={styles.btnContainer}>
