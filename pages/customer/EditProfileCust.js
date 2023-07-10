@@ -29,6 +29,16 @@ class EditProfileCust extends Component {
         this.setState({ userBranchId })
     }
 
+    validatePhone = () => {
+        const { phone } = this.state;
+        const phoneRegex = /^\d{10}$|^\d{11}$|^\+[1-9]\d{10}$/;
+        if (!phoneRegex.test(phone)) {
+            alert('Please enter a valid phone number.');
+        } else {
+            this.handleSubmit()
+        }
+    };
+
     getData = () => {
 
         database()
@@ -63,6 +73,7 @@ class EditProfileCust extends Component {
             .update({
                 username: this.state.username,
                 phone_no: this.state.phone,
+                dp_url: this.state.profilePic
             })
             .then(() => {
                 this.props.navigation.navigate('TabsCust');
@@ -90,14 +101,23 @@ class EditProfileCust extends Component {
                             keyboardType="numeric"
                             placeholder='Phone Number'
                         />
-                        {this.state.productImage && (
-                            <Image style={styles.image} source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/almondLondon.jpg?alt=media&token=4d342545-4f84-435b-91b3-461ce530b15f' }} />
+                        {this.state.profilePic && (
+                            <Image style={styles.image} source={{ uri: this.state.profilePic }} />
                         )}
-                        <Pressable onPress={() => this.handleProductImageChange('https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/almondLondon.jpg?alt=media&token=4d342545-4f84-435b-91b3-461ce530b15f')}>
+                        <Pressable onPress={() => this.setProfilePic('https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/profilePlaceholderImage.png?alt=media&token=d157ec4f-f17e-40d4-9781-0316e7f7e2a9')}>
                             <Text style={styles.chooseImgBtn}>Choose Image</Text>
                         </Pressable>
                     </View>
-                    <Pressable onPress={(this.state.productName != '' && this.state.productPrice != '' && this.state.productDescription != '') ? this.handleSubmit : () => { alert('All field must be filled') }}>
+                    <Pressable onPress={
+                        () => {
+                            if (this.state.username != '' && this.state.phone != '') {
+                                this.validatePhone()
+                            }
+                            else {
+                                alert('All field must be filled')
+                            }
+                        }
+                    }>
                         <Text style={styles.submitBtn}>Save</Text>
                     </Pressable>
                 </View>

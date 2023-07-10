@@ -7,7 +7,6 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import VoucherModal from "../../components/Promotion/VoucherModal";
-import PaymentScreen from "../PaymentScreen";
 
 const { width } = Dimensions.get('window');
 
@@ -104,6 +103,17 @@ class CheckOut extends Component {
 
     setDiscount = (discount) => {
         this.setState({ discount })
+    };
+
+    validatePhone = () => {
+        const { recepientPhone } = this.state;
+        const phoneRegex = /^\d{10}$|^\d{11}$|^\+[1-9]\d{10}$/;
+        if (!phoneRegex.test(recepientPhone)) {
+            alert('Please enter a valid phone number.');
+        } else {
+            console.log('masuk boss')
+            this.placeOrder()
+        }
     };
 
     getData = () => {
@@ -379,7 +389,6 @@ class CheckOut extends Component {
                                 >
                                     <Text style={[styles.optionText, this.state.selectedOption === 'option2' && styles.selectedOptionText]}>Sabah & Sarawak</Text>
                                 </TouchableOpacity>
-                                {/* <Text>Selected Option: {this.state.selectedOption}</Text> */}
                             </View>
 
                         </View>
@@ -396,9 +405,7 @@ class CheckOut extends Component {
 
                             />
 
-
                         ))}
-                        {/* <ProductBox /> */}
                         <View style={styles.billingDetailsBox}>
                             <Text style={styles.title}>Payment Details</Text>
                             <View style={styles.space}>
@@ -420,21 +427,22 @@ class CheckOut extends Component {
                                     <Text style={{ fontSize: 16, fontWeight: '700', color: '#DB9B06', marginLeft: 8 }}>Apply a voucher</Text>
                                 </View>
                             </Pressable>
-
-
                             <View style={[styles.space, styles.totalPaymentBox]}>
                                 <Text style={{ fontSize: 18, fontWeight: '700', color: 'black' }}>Total Payment</Text>
                                 <Text style={{ fontSize: 18, color: '#DB9B06' }}>{'RM ' + Number(this.getTotalPayment()).toFixed(2)}</Text>
                             </View>
                         </View>
-                        {/* <PaymentScreen /> */}
                     </ScrollView>
                     <BigYellowButton clickHandle={() => {
+                        if (this.state.billingName && this.state.billingAddress && this.state.recepientPhone && this.state.selectedOption) {
+                            this.validatePhone()
+                        }
+                        else {
+                            alert('All field must be filled')
+                        }
+                    }
 
-                        this.state.billingName && this.state.billingAddress && this.state.recepientPhone && this.state.selectedOption ?
-                            this.placeOrder() : alert('All field must be filled')
-
-                    }} btnText={'Place Order'} />
+                    } btnText={'Place Order'} />
 
                 </View>
                 <VoucherModal
