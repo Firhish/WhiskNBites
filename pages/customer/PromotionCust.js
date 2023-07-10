@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Dimensions, ScrollView, SafeAreaView, Pressable, Text } from 'react-native';
 import TabHeader from '../../components/TabHeader';
 import database from '@react-native-firebase/database';
-import PromotionBoxMod from '../../components/Promotion/PromotionBoxMod';
 import auth from '@react-native-firebase/auth';
 import PromotionBoxCust from '../../components/Promotion/PromotionBoxCust';
-
-
 
 class PromotionCust extends Component {
 
@@ -76,7 +73,6 @@ class PromotionCust extends Component {
         }
         else {
           return null
-          // console.log('kosong mat')
         }
 
         this.setPromoArr(data)
@@ -112,6 +108,7 @@ class PromotionCust extends Component {
                     name={promo.name}
                     validity={promo.validity}
                     code={promo.code}
+                    image={promo.image}
                   />
                 )).reverse()}
               </ScrollView>

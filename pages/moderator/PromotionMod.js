@@ -6,6 +6,7 @@ import PromotionBoxMod from '../../components/Promotion/PromotionBoxMod';
 import OptionModal from '../../components/OptionModal';
 import Overlay from '../../components/Overlay';
 import ConfirmModal from '../../components/ConfirmModal';
+import PromoViewModel from '../../viewmodel/PromoViewModel';
 
 const { width } = Dimensions.get('window');
 
@@ -18,6 +19,8 @@ class PromotionMod extends Component {
     confirmModalVisible: false,
     promoId: '',
   }
+
+  promoViewModel = new PromoViewModel()
 
   setModalVisible = (visible) => {
     this.setState({ modalVisible: visible })

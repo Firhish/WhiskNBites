@@ -47,7 +47,8 @@
 - Add SignUp email validation
 - Add analytic feature
 - Add stripe
-- Add payment sreen 
+- Add payment screen 
+- Add validation
 
 ## Fixed
 - Fixed UI Add New Product form
@@ -59,3 +60,4 @@
 - Fixed and add exception
 - Fixed Promo Moderator UI
 - Fixed Product Description
+- Fixed Promotion UI

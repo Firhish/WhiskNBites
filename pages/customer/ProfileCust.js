@@ -15,7 +15,7 @@ class ProfileCust extends Component {
         modalVisible: false,
         confirmModalVisible: false,
         coverPic: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/backgroundProfile.png?alt=media&token=37e93e89-8a5e-4472-90df-2731a7dfaf63',
-        profilePic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT23NlA9taxcUhdcm3JbbPqRoNfn5m9gxVjQ&usqp=CAU',
+        profilePic: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/profilePlaceholderImage.png?alt=media&token=d157ec4f-f17e-40d4-9781-0316e7f7e2a9',
         username: '',
         email: '',
         phone: '',

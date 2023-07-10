@@ -10,12 +10,12 @@ class SignUp extends Component {
         emailVal: '',
         pwdVal: '',
         phoneVal: '',
-        usernameVal:'',
+        usernameVal: '',
         isFocusedEmail: false,
         isFocusedPwd: false,
         isFocusedPhone: false,
         isFocusedUsername: false,
-        
+
 
     }
 
@@ -34,14 +34,13 @@ class SignUp extends Component {
                         username: this.state.usernameVal,
                         uid: auth().currentUser.uid,
                         user_type: 'customer',
-                        timestamp: Date.now(), 
-                        dp_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT23NlA9taxcUhdcm3JbbPqRoNfn5m9gxVjQ&usqp=CAU'
+                        timestamp: Date.now(),
+                        dp_url: 'https://firebasestorage.googleapis.com/v0/b/whisk-n-bites-a4339.appspot.com/o/profilePlaceholderImage.png?alt=media&token=d157ec4f-f17e-40d4-9781-0316e7f7e2a9'
                     })
                     .then(() => {
                         alert('Signup successfully')
                         this.props.navigation.navigate('TabsCust');
                     })
-                // this.props.navigation.navigate('TabsCust');
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
@@ -84,19 +83,26 @@ class SignUp extends Component {
         this.setState({ phoneVal: text });
     }
 
-    setUsername= (text) => {
+    setUsername = (text) => {
         this.setState({ usernameVal: text });
     }
 
-    validateEmail = () => {
+    validateEmailPhone = () => {
         const { emailVal } = this.state;
+        const { phoneVal } = this.state;
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const phoneRegex = /^\d{10}$|^\d{11}$|^\+[1-9]\d{10}$/;
         if (!emailRegex.test(emailVal)) {
             alert('Please enter a valid email address.');
         } else {
-            this.onClickHandle()
-            // alert('Email is valid.');
+            if (!phoneRegex.test(phoneVal)) {
+                alert('Please enter a valid phone number.');
+            } else {
+                this.onClickHandle()
+            }
         }
+
+
     };
 
     render() {
@@ -141,22 +147,18 @@ class SignUp extends Component {
                         onFocus={this.handleFocusPwd}
                         secureTextEntry={true}
                     />
-                    
+
                 </View>
                 <Pressable onPress={
-                    // (this.state.emailVal != ""
-                    //  && this.state.pwdVal != "" 
-                    //  && this.state.phoneVal != "" 
-                    //  && this.state.usernameVal != "") ? this.onClickHandle :
-                    //  () => { alert('All field must be filled') }
+
                     () => {
 
                         if (this.state.emailVal != "" && this.state.pwdVal != "" && this.state.phoneVal != "" && this.state.usernameVal != "") {
 
-                            this.validateEmail(this.state.emailVal)
+                            this.validateEmailPhone()
 
                         }
-                        else{
+                        else {
 
                             alert('All field must be filled')
 

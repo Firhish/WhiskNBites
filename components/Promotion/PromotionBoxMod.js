@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
 
   promotionBox: {
-    width: 370,
+    width: 380,
     height: 80,
     borderRadius: 8,
     alignItems: 'center',

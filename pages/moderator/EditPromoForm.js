@@ -19,7 +19,14 @@ class EditPromoForm extends Component {
     };
 
     handlePromoDiscountChange = promoDiscount => {
+
+        if (promoDiscount >= 1) {
+            alert('Promotion discount must be less than 1');
+            return;
+        }
+
         this.setState({ promoDiscount });
+
     };
 
     handlePromoValidityChange = promoValidity => {
@@ -28,6 +35,16 @@ class EditPromoForm extends Component {
 
     handlePromoCodeChange = promoCode => {
         this.setState({ promoCode });
+    };
+
+    validatePromoDiscount = () => {
+        const { promoDiscount } = this.state;
+
+        if (promoDiscount == 0) {
+            alert('Promotion discount cannot be equal or less than 0');
+        } else {
+            this.handleSubmit()
+        }
     };
 
     getData = () => {
@@ -62,12 +79,9 @@ class EditPromoForm extends Component {
 
     getDate = (date) => {
 
-
         this.handlePromoValidityChange(date)
-        // console.log('dah ada sini: '+ this.state.promoValidity)
-        // return date
-    
-      }
+
+    }
 
     handleSubmit = () => {
 
@@ -75,8 +89,8 @@ class EditPromoForm extends Component {
             .ref('/Promotions/' + this.props.route.params.promoId)
             .update({
                 name: this.state.promoName,
-                discount: this.state.promoDiscount,
-                code: this.state.promoCode,
+                discount: Number(this.state.promoDiscount).toFixed(2),
+                code: (this.state.promoCode).toUpperCase(),
                 validity: Date.parse(this.state.promoValidity)
 
             })
@@ -85,7 +99,7 @@ class EditPromoForm extends Component {
                 this.props.navigation.navigate('TabsMod');
                 alert('Promotion updated successfully')
             });
-        
+
     };
 
     render() {
@@ -106,13 +120,14 @@ class EditPromoForm extends Component {
                             onChangeText={this.handlePromoDiscountChange}
                             value={this.state.promoDiscount}
                             keyboardType="numeric"
-                            placeholder='Promotion Discount'
+                            placeholder='Promotion Discount (e.g enter 0.2 for 20% discount)'
                         />
                         <TextInput
                             style={styles.input}
                             onChangeText={this.handlePromoCodeChange}
                             value={this.state.promoCode}
                             placeholder='Promotion Code'
+                            maxLength={6}
                         />
 
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 15 }}>
@@ -123,7 +138,23 @@ class EditPromoForm extends Component {
                         </View>
 
                     </View>
-                    <Pressable onPress={(this.state.promoName != '' && this.state.promoDiscount != '' && this.state.promoCode != '') ? this.handleSubmit : () => { alert('All field must be filled') }}>
+                    <Pressable onPress={
+
+                        () => {
+
+                            if (this.state.promoName != '' && this.state.promoDiscount != '' && this.state.promoCode != '' && this.state.promoValidity != null) {
+
+
+                                this.validatePromoDiscount()
+
+                            }
+                            else {
+
+                                alert('All field must be filled')
+
+                            }
+                        }
+                    }>
                         <Text style={styles.submitBtn}>Save</Text>
                     </Pressable>
                 </View>
