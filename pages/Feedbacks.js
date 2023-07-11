@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import TransparentHeader from '../components/TransparentHeader';
 import FeedbackBox from '../components/Catalog/FeedbackBox';
 import database from '@react-native-firebase/database';
+import moment from "moment/moment";
 
 class Feedbacks extends Component {
 
@@ -46,7 +47,7 @@ class Feedbacks extends Component {
 
                 {this.state.feedbacks != 0 ?
                     this.state.feedbacks.map((feedback, index) => (
-                        <FeedbackBox key={index} comment={feedback.comment} user_id={feedback.user_id} />
+                        <FeedbackBox key={index} comment={feedback.comment} user_id={feedback.user_id} timestamp={feedback.timestamp} />
                     )) : <Text style={{ textAlign: 'center', marginTop: '70%', fontSize: 16 }}>No feedback yet</Text>}
 
             </View>

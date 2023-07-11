@@ -75,6 +75,7 @@ class CompletedOrder extends Component {
                                 totalPayment={order.totalPayment}
                                 cart={order.cart}
                                 status={order.status}
+                                toRateOrder={()=>{this.props.navigation.navigate('RateProductCust',{cart: order.cart})}}
                             />
                         </Pressable>
 

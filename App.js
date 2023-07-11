@@ -33,6 +33,8 @@ import EditPromoForm from "./pages/moderator/EditPromoForm";
 import { StripeProvider } from '@stripe/stripe-react-native';
 import PaymentScreen from "./pages/PaymentScreen";
 import PaymentCust from "./pages/customer/PaymentCust";
+import RateProductCust from "./pages/customer/RateProductCust";
+import AddFeedbackForm from "./pages/customer/AddFeedbackForm";
 
 
 const Stack = createNativeStackNavigator();
@@ -97,6 +99,8 @@ class App extends Component {
             <Stack.Screen name='ViewOrderDetailMod' component={ViewOrderDetailMod} options={{ headerShown: false }} />
             <Stack.Screen name='AddPromoForm' component={AddPromoForm} options={{ headerShown: false }} />
             <Stack.Screen name='EditPromoForm' component={EditPromoForm} options={{ headerShown: false }} />
+            <Stack.Screen name='RateProductCust' component={RateProductCust} options={{ headerShown: false }} />
+            <Stack.Screen name='AddFeedbackForm' component={AddFeedbackForm} options={{ headerShown: false }} />
           </Stack.Navigator>
         </NavigationContainer>
         {/* <PaymentScreen/> */}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import Divider from '../Divider';
 import database from '@react-native-firebase/database';
+import moment from "moment/moment";
 
 class FeedbackBox extends Component {
 
@@ -54,7 +55,7 @@ class FeedbackBox extends Component {
                             <Image source={{ uri: this.state.userImage }} style={styles.userImage} />
                             <Text style={styles.usernameText}>{this.state.username}</Text>
                         </View>
-                        <Text>1 min ago</Text></View>
+                        <Text>{moment(this.props.timestamp).fromNow()}</Text></View>
 
                     <View style={styles.lower}>
                         <Text style={styles.feedbackText}>{this.props.comment ? this.props.comment : 'loading...'}</Text>
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     feedbackText: {
         marginTop: 20,
         fontSize: 18,
-        color:'black'
+        color: 'black'
     },
 
 })
