@@ -49,6 +49,7 @@
 - Add stripe
 - Add payment screen 
 - Add validation
+- Add Create Feedback Feature
 
 ## Fixed
 - Fixed UI Add New Product form

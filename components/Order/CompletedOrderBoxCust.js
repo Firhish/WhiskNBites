@@ -90,9 +90,10 @@ class CompletedOrderBoxCust extends Component {
                 <Divider />
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 12, alignItems: 'center' }}>
-
                     <StatusLabel status={this.props.status} />
-
+                    <Pressable onPress={this.props.toRateOrder}>
+                        <View style={styles.rateBtnContainer}><Text style={styles.btnText}>Rate</Text></View>
+                    </Pressable>
                 </View>
 
 
@@ -157,6 +158,25 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 12,
         borderRadius: 4,
+
+
+    },
+
+    btnText: {
+
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 14,
+
+    },
+
+    rateBtnContainer: {
+
+        backgroundColor: '#DB9B06',
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        borderRadius: 4,
+        width: 120
 
 
     },
